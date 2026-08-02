@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Become Karthik | Vegas Experience</title>
+    <!-- Include QR Code Scanner Library -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <!-- Google Fonts for Cyber/Vegas Style -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --primary-neon: #00ff88;
+            --secondary-neon: #ff007f;
+            --accent-gold: #ffcc00;
+            --text-main: #e2e8f0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(255, 0, 127, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 20% 90%, rgba(0, 255, 136, 0.1) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            max-width: 550px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--primary-neon);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: #94a3b8;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 136, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        button {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, var(--primary-neon), #00cc6a);
+            color: #070913;
+            border: none;
+            padding: 14px 20px;
+            margin: 12px 0 0 0;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .option-btn {
+            background: rgba(31, 41, 55, 0.6);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+            box-shadow: none;
+        }
+
+        .option-btn:hover {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: var(--primary-neon);
+            color: var(--primary-neon);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .vault-input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            border-radius: 8px;
+            text-align: center;
+            box-sizing: border-box;
+            margin: 15px 0 5px 0;
+            outline: none;
+        }
+
+        .vault-input::placeholder {
+            color: rgba(255, 204, 0, 0.4);
+        }
+
+        .vault-btn {
+            background: linear-gradient(135deg, var(--accent-gold), #ffaa00);
+            color: #070913;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+        .vault-btn:hover {
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+        }
+
+        #reader {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--primary-neon);
+        }
+
+        .hidden { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>🎲 BECOME KARTHIK</h1>
+        <div class="subtitle">Vegas Simulation Protocol</div>
+    </div>
+
+    <!-- LANDING / PRE-GAME SCREEN -->
+    <div id="stage-landing" class="card">
+        <h3>🚨 Security Lockdown</h3>
+        <p>You've stumbled upon a classified Vegas checkpoint too early. The vault is securely locked until the simulation host initiates startup.</p>
+        <button onclick="startMainGame()">Initialize Simulation</button>
+    </div>
+
+    <!-- STAGE 1: BUFFET -->
+    <div id="stage-1" class="card hidden">
+        <h3>Stage 1: The Bellagio Buffet</h3>
+        <p>Karthik walks into the legendary buffet layout. What's his immediate tactical move?</p>
+        <button class="option-btn" onclick="checkAnswer(1, 'A')">A. Dessert first</button>
+        <button class="option-btn" onclick="checkAnswer(1, 'B')">B. Find seafood</button>
+        <button class="option-btn" onclick="checkAnswer(1, 'C')">C. Look for the biggest steak</button>
+        <button class="option-btn" onclick="checkAnswer(1, 'D')">D. Eat whatever everyone else is having</button>
+    </div>
+
+    <!-- STAGE 2: CASINO -->
+    <div id="stage-2" class="card hidden">
+        <h3>Stage 2: The Casino Floor</h3>
+        <p>You have $100 in hand. What would Karthik naturally do next?</p>
+        <button class="option-btn" onclick="checkAnswer(2, 'A')">A. Go all-in on one hand.</button>
+        <button class="option-btn" onclick="checkAnswer(2, 'B')">B. Play cautiously.</button>
+        <button class="option-btn" onclick="checkAnswer(2, 'C')">C. Walk away and watch everyone else.</button>
+        <button class="option-btn" onclick="checkAnswer(2, 'D')">D. Spend it on food instead.</button>
+    </div>
+
+    <!-- STAGE 3: THE CLUB -->
+    <div id="stage-3" class="card hidden">
+        <h3>Stage 3: The Club</h3>
+        <p>The bass is thumping and everyone wants to hit the dance floor. Karthik would:</p>
+        <button class="option-btn" onclick="checkAnswer(3, 'A')">A. Be first on the dance floor.</button>
+        <button class="option-btn" onclick="checkAnswer(3, 'B')">B. Need convincing.</button>
+        <button class="option-btn" onclick="checkAnswer(3, 'C')">C. Become the DJ.</button>
+        <button class="option-btn" onclick="checkAnswer(3, 'D')">D. Stay at the table.</button>
+    </div>
+
+    <!-- SCANNER SCREEN -->
+    <div id="scanner-screen" class="card hidden">
+        <h3 id="scanner-title" style="color: var(--primary-neon);">Access Granted!</h3>
+        <p id="scanner-instructions">Scan the next physical QR code hidden in the room to proceed to the next sector.</p>
+        <button onclick="startScanner()">Open Camera to Scan QR</button>
+        <div id="reader" style="width: 100%; margin-top: 15px;"></div>
+    </div>
+
+    <!-- FINAL VAULT -->
+    <div id="stage-vault" class="card hidden" style="border-color: var(--accent-gold);">
+        <h3 style="color: var(--accent-gold);">Analysis Complete…</h3>
+        <p>Behavioral Similarity to Karthik: <strong style="color: #fff;">94%</strong>.</p>
+        <p style="color: var(--accent-gold);">The only person who can truly bypass security and unlock Karthik’s Vault… is Karthik.</p>
+        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 5px;">Hand the device to Karthik for final biometric verification.</p>
+        <input type="password" id="pin-input" class="vault-input" placeholder="ENTER SECRET CODE">
+        <button class="vault-btn" onclick="unlockVault()">Unlock Vault</button>
+        <p id="vault-msg" class="hidden" style="color: var(--primary-neon); font-weight: bold; margin-top: 15px; text-align: center;">🎉 VAULT UNLOCKED! Happy Birthday Karthik! Enjoy your gift!</p>
+    </div>
+
+    <script>
+        const correctAnswers = { 1: 'B', 2: 'B', 3: 'D' };
+        let currentStage = 0;
+        let html5QrCode;
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const qrType = urlParams.get('qr');
+
+            if (qrType && currentStage === 0) {
+                alert("💅 Haha, nice try honey!! Ask Karthik’s birthday host to officially start the game and we can talk!");
+            }
+        };
+
+        function startMainGame() {
+            currentStage = 1;
+            hideAll();
+            document.getElementById('stage-1').classList.remove('hidden');
+        }
+
+        function checkAnswer(stage, choice) {
+            if (choice === correctAnswers[stage]) {
+                alert("✨ Correct decision pattern matched!");
+                hideAll();
+                document.getElementById('scanner-screen').classList.remove('hidden');
+                document.getElementById('scanner-instructions').innerText = `Scan the QR code hidden for Stage ${stage + 1}!`;
+            } else {
+                alert("❌ Mismatch! Penalty: Do 5 jumping jacks and try again.");
+            }
+        }
+
+        function startScanner() {
+            const btn = document.querySelector('#scanner-screen button');
+            if (btn) btn.style.display = 'none';
+            
+            html5QrCode = new Html5Qrcode("reader");
+            
+            html5QrCode.start(
+                { facingMode: "environment" }, 
+                { fps: 10, qrbox: { width: 220, height: 220 } },
+                (decodedText, decodedResult) => {
+                    html5QrCode.stop().then(() => {
+                        document.getElementById('reader').innerHTML = "";
+                        if (btn) btn.style.display = 'block';
+                        advanceStage();
+                    }).catch(err => console.log(err));
+                },
+                (errorMessage) => {}
+            ).catch(err => {
+                alert("Unable to access camera. Make sure you are using HTTPS or localhost.");
+                if (btn) btn.style.display = 'block';
+            });
+        }
+
+        function advanceStage() {
+            hideAll();
+            currentStage++;
+            if (currentStage <= 3) {
+                document.getElementById(`stage-${currentStage}`).classList.remove('hidden');
+            } else {
+                document.getElementById('stage-vault').classList.remove('hidden');
+            }
+        }
+
+        function unlockVault() {
+            const pin = document.getElementById('pin-input').value;
+            if (pin === "1234" || pin.toLowerCase() === "karthik") {
+                document.getElementById('vault-msg').classList.remove('hidden');
+            } else {
+                alert("Incorrect code! Only Karthik knows this.");
+            }
+        }
+
+        function hideAll() {
+            document.getElementById('stage-landing').classList.add('hidden');
+            document.getElementById('stage-1').classList.add('hidden');
+            document.getElementById('stage-2').classList.add('hidden');
+            document.getElementById('stage-3').classList.add('hidden');
+            document.getElementById('scanner-screen').classList.add('hidden');
+            document.getElementById('stage-vault').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
