@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📜 Become Karthik | Cinematic Dungeon Master Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=IM+Fell+English+SC&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    
+    <style>
+        :root {
+            --bg-color: #0b0907;
+            --card-bg: rgba(22, 18, 14, 0.92);
+            --primary-gold: #d4af37;
+            --secondary-gold: #f3e5ab;
+            --accent-red: #8b0000;
+            --text-main: #e2d8c3;
+            --danger-red: #ff3333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 90%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--primary-gold);
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'IM Fell English SC', serif;
+            font-size: 13px;
+            color: #bfa15f;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.4s ease-out forwards;
+            margin-bottom: 15px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--accent-red));
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: var(--secondary-gold);
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #d1c7b7;
+        }
+
+        button {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, var(--primary-gold), #b38f27);
+            color: #0b0907;
+            border: none;
+            padding: 14px 20px;
+            margin: 12px 0 0 0;
+            width: 100%;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .option-btn {
+            background: rgba(35, 28, 22, 0.8);
+            color: var(--text-main);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: left;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+            box-shadow: none;
+        }
+
+        .option-btn:hover, .option-btn.selected {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
+            color: var(--secondary-gold);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(10, 8, 6, 0.8);
+            border: 1px solid var(--primary-gold);
+            color: var(--secondary-gold);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin: 10px 0;
+            outline: none;
+        }
+
+        .vault-input {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            letter-spacing: 8px;
+        }
+
+        .vault-btn {
+            background: linear-gradient(135deg, var(--primary-gold), #99751e);
+            color: #0b0907;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .danger-box {
+            border-color: var(--danger-red);
+        }
+        .danger-box::before {
+            background: var(--danger-red);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+        }
+
+        .riddle-box {
+            background: rgba(212, 175, 55, 0.05);
+            border-left: 3px solid var(--primary-gold);
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #f7edcc;
+        }
+
+        #reader {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        /* CUSTOM MODAL OVERLAYS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 6, 5, 0.88);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-card {
+            background: #16120e;
+            border: 2px solid var(--primary-gold);
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.25);
+            text-align: center;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .modal-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-gold);
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .modal-card p {
+            font-size: 14px;
+            color: #d1c7b7;
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-actions button {
+            margin: 0;
+        }
+
+        .hidden { display: none !important; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container" id="main-header">
+        <h1>📜 BECOME KARTHIK</h1>
+        <div class="subtitle" id="user-badge">Dungeon Master Campaign</div>
+    </div>
+
+    <!-- REGISTRATION SCREEN -->
+    <div id="screen-register" class="card">
+        <h3>👤 State Your Party's Moniker</h3>
+        <p>Inscribe your adventurer name or team tag into the Dungeon Master's Grimoire.</p>
+        <input type="text" id="player-name-input" class="text-input" placeholder="e.g. Fellowship of Karthik / Rahul">
+        <button onclick="registerPlayer()">Enter Realm</button>
+    </div>
+
+    <!-- CHECKPOINT / SCANNER SCREEN -->
+    <div id="screen-checkpoint" class="card hidden">
+        <h3>🚨 Seek the Next Sector</h3>
+        <p>Decipher the arcane riddle below to discover where the next QR portal lies hidden within the chambers.</p>
+        
+        <div class="riddle-box" id="riddle-text"></div>
+
+        <button class="vault-btn" onclick="startScanner()">📸 Open In-App Portal Scanner</button>
+        <div id="reader" class="hidden"></div>
+        <button id="stop-scanner-btn" class="hidden" style="background: var(--danger-red); color: #fff;" onclick="stopScanner()">Close Portal</button>
+        <button class="vault-btn" style="margin-top: 15px;" onclick="forceCheckUpdate()">🔄 Inspect Realm Status</button>
+    </div>
+
+    <!-- QUESTION STAGES -->
+    <div id="screen-question" class="card hidden">
+        <h3 id="question-title">Chapter Title</h3>
+        <p id="question-text">Trial description goes here...</p>
+        <div id="options-container"></div>
+        <button id="submit-ans-btn" class="hidden" onclick="submitAnswerSelection()">Submit Fate</button>
+        
+        <div id="waiting-result-section" class="hidden">
+            <p style="margin-top: 15px; font-size: 13px; color: var(--primary-gold); text-align: center;">⏳ Fate sealed! Awaiting Dungeon Master's judgment. Click below to inspect your verdict when proclaimed!</p>
+            <button class="vault-btn" onclick="forceCheckUpdate()">🔄 Inspect Verdict</button>
+        </div>
+    </div>
+
+    <!-- LOCKED OUT SCREEN -->
+    <div id="screen-locked" class="card danger-box hidden">
+        <h3 style="color: var(--danger-red);">🔒 Sector Sealed By Wards!</h3>
+        <p id="lock-message">You triggered security runes and failed your trial.</p>
+        <p style="color: var(--primary-gold);"><strong>Penalty Status:</strong> Summon the Dungeon Master to lift the ward or advance your quest.</p>
+        <p id="lock-status-text" style="font-size: 12px; color: #bfa15f; margin-top: 10px;"></p>
+        <button style="background: var(--danger-red); color: #fff;" onclick="requestUnlock()">Summon Dungeon Master</button>
+    </div>
+
+    <!-- STAGE 6: THE SRIYA PROTOCOL (KARTHIK'S CHALLENGE) -->
+    <div id="screen-stage6" class="card hidden" style="border-color: var(--primary-gold);">
+        <h3 style="color: var(--primary-gold);">🌟 Chapter VI: The Sriya Protocol</h3>
+        <p>Karthik, your hour has come. To locate the final vault key, you must prove you possess absolute mastery over Sriya's mind.</p>
+        <p style="font-size: 13px; color: #d1c7b7;"><strong>RULES:</strong> Ponder the 3 trials below. Determine Sriya's true choice. The <strong>first letter</strong> of each correct option forges your 3-rune master lock code.</p>
+        
+        <div class="riddle-box">
+            📍 <strong>1 (M):</strong> [Type your trial here - e.g., What is Sriya's ultimate comfort food order?]<br><br>
+            📍 <strong>2 (A):</strong> [Type your trial here - e.g., Where does Sriya always desire to wander on weekends?]<br><br>
+            📍 <strong>3 (S):</strong> [Type your trial here - e.g., What action does Sriya take when Karthik attempts culinary sorcery?]
+        </div>
+        
+        <p style="font-size: 13px; color: var(--secondary-gold); margin-top: 10px;">Inscribe the 3-rune passcode:</p>
+        <input type="text" id="room-name-input" class="text-input vault-input" placeholder="***" maxlength="3" oninput="this.value = this.value.toUpperCase()">
+        <button class="vault-btn" onclick="verifyMasterRoom()">Unlock Sanctuary Vault</button>
+        
+        <p id="room-success-msg" class="hidden" style="color: var(--primary-gold); font-size: 15px; font-weight: bold; margin-top: 15px; text-align: center; border: 1px dashed var(--primary-gold); padding: 10px;">
+            🎉 RUNES ACCEPTED! <br><br>
+            <span style="color: #fff;">The physical key lies hidden...</span><br>
+            <strong>[ENTER PHYSICAL KEY LOCATION HERE - e.g. Taped beneath the dining table]!</strong><br><br>
+            Claim your prize, Karthik!
+        </p>
+    </div>
+
+    <!-- GLOBAL WINNER BROADCAST SCREEN -->
+    <div id="screen-winner-broadcast" class="card hidden" style="border-color: var(--primary-gold); text-align: center;">
+        <h3 style="color: var(--primary-gold); font-size: 22px;">🏆 THE CAMPAIGN CONCLUDES 🏆</h3>
+        <p style="font-size: 14px; color: #bfa15f; margin-bottom: 20px;">All sectors have fallen. The ultimate champion of the realm stands crowned!</p>
+        
+        <div style="background: rgba(212, 175, 55, 0.08); border: 1px solid var(--primary-gold); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <p style="font-size: 12px; color: #d1c7b7; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 5px 0;">🥇 Grand Champion 🥇</p>
+            <h2 id="broadcast-winner-name" style="font-family: 'Cinzel', serif; font-size: 28px; color: var(--primary-gold); margin: 0 0 10px 0;">---</h2>
+            <p id="broadcast-winner-stats" style="font-size: 14px; color: #fff; margin: 0;"></p>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.5); border-radius: 8px; padding: 12px; text-align: left; margin-bottom: 15px;">
+            <h4 style="color: var(--primary-gold); font-size: 13px; margin: 0 0 8px 0; font-family: 'Cinzel', serif;">Hall of Heroes Podiums:</h4>
+            <div id="broadcast-podium-list" style="font-size: 13px; color: #d1c7b7;"></div>
+        </div>
+
+        <p style="font-size: 12px; color: #bfa15f; font-style: italic;">The realm now yields to Karthik for the final Sriya Protocol trial!</p>
+    </div>
+
+    <!-- ADMIN PANEL OVERLAY -->
+    <div id="screen-admin" class="card hidden" style="border-color: var(--accent-red);">
+        <h3 style="color: var(--accent-red);">📜 Dungeon Master Grimoire</h3>
+        <p style="font-size: 12px; color: #bfa15f;">Linked to Cloud Grimoire. Adventurer statuses update in real time (Admin Only Screen).</p>
+        
+        <!-- AUDIO IMMERSION CONTROLS FOR ADMIN -->
+        <div style="margin-top: 15px; background: rgba(139, 0, 0, 0.15); border: 1px solid var(--accent-red); padding: 12px; border-radius: 8px;">
+            <h4 style="color: var(--primary-gold); font-size: 14px; margin-bottom: 5px;">🎵 Atmospheric Soundscape & Cinematic DM Voice</h4>
+            <p style="font-size: 12px; color: #d1c7b7; margin-bottom: 10px;">Summon thunderous dungeon music, howling rain, and deep devilish ambience through your room speaker, alongside the cinematic DM voice:</p>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <button class="vault-btn" style="flex: 1; margin: 0; font-size: 11px;" onclick="toggleBackgroundAudio()">⚡ Toggle D&D Ambience (Rain & Dark Drone)</button>
+                <button id="admin-voice-toggle-btn" style="flex: 1; margin: 0; font-size: 11px; background: #374151; color: #fff;" onclick="toggleAdminVoice()">🔊 DM Voice: ON</button>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 8px;">
+            <h4 style="color: var(--primary-gold); font-size: 14px; margin-bottom: 5px;">🏆 Champion Proclamation Controls</h4>
+            <p style="font-size: 12px; color: #d1c7b7; margin-bottom: 10px;">Proclaim the champion to all big screens prior to Karthik's final Chapter VI:</p>
+            <button class="vault-btn" style="margin: 0;" onclick="triggerDeclareWinner()">📢 Proclaim Champion to All Realms</button>
+            <button style="background: #374151; color: #fff; margin-top: 8px;" onclick="cancelDeclareWinner()">🔄 Conceal Champion Banner</button>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <h4 style="color: #fff; font-size: 14px; margin-bottom: 5px;">⚡ Trial Runes & Verdict Proclamation</h4>
+            <div id="admin-controls-container" style="font-size: 13px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px;"></div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h4 style="color: #fff; font-size: 14px; margin-bottom: 5px;">Adventurer Ledger & Statuses</h4>
+            <div id="admin-table-container"></div>
+        </div>
+        
+        <button style="background: var(--accent-red); color: #fff; margin-top: 20px;" onclick="resetEntireDatabase()">⚠️ Purge Grimoire & Reset Realm</button>
+        <button style="background: #374151; color: #fff; margin-top: 10px;" onclick="closeAdminPanel()">Close Grimoire</button>
+    </div>
+
+    <!-- CUSTOM STYLED DIALOG MODAL -->
+    <div id="custom-modal" class="modal-overlay hidden">
+        <div class="modal-card" id="modal-card-box">
+            <h3 id="modal-title" style="color: var(--primary-gold);">Notice</h3>
+            <p id="modal-message">Message goes here...</p>
+            <div id="modal-input-container" class="hidden">
+                <input type="text" id="modal-input" class="text-input" placeholder="">
+            </div>
+            <div class="modal-actions" id="modal-actions-container">
+                <button id="modal-ok-btn" onclick="closeModal(true)">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (ES Module Integration) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-analytics.js";
+        import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrkLzino6MfpKtcdf9hCIihznaEPoQ250",
+            authDomain: "karthikvegasgame.firebaseapp.com",
+            databaseURL: "https://karthikvegasgame-default-rtdb.firebaseio.com",
+            projectId: "karthikvegasgame",
+            storageBucket: "karthikvegasgame.firebasestorage.app",
+            messagingSenderId: "977251555501",
+            appId: "1:977251555501:web:44cc7509a23256f2ea8e24",
+            measurementId: "G-TKLVZYT0ML"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const rdb = getDatabase(app);
+
+        const stagesData = {
+            1: {
+                title: "Chapter I: The Kitchen Domain",
+                text: "Karthik stands before a momentous choice when evening plans loom. What is his signature maneuver?",
+                options: [
+                    { id: 'A', text: "A. Over-analyze every alternative until midnight arrives" },
+                    { id: 'B', text: "B. Propose an overly elaborate, hyper-calculated itinerary" },
+                    { id: 'C', text: "C. Proclaim 'let us wing it' and instantly lament it" },
+                    { id: 'D', text: "D. Fall into deep slumber before the quest begins" }
+                ],
+                riddle: "📜 <strong>Riddle:</strong> I have teeth yet cannot bite, possessing a sharp tongue that cuts through silence. Yet when Karthik grows hungry, I am forsaken for a courier while you stare blankly into my cold illumination. What am I?"
+            },
+            2: {
+                title: "Chapter II: The Laundry Sanctuary",
+                text: "When Karthik confronts a domestic chore or administrative task, how long does it languish?",
+                options: [
+                    { id: 'A', text: "A. Finished within 5 breaths of its discovery" },
+                    { id: 'B', text: "B. Left in 'pending purgatory' inside the drum for 3 business days" },
+                    { id: 'C', text: "C. Delegated instantly to a fellow party member" },
+                    { id: 'D', text: "D. Cast into absolute oblivion" }
+                ],
+                riddle: "📜 <strong>Riddle:</strong> I swallow colorful heaps, whirl them in circles, and offer a warm resting couch where garments dwell in purgatory for three business days instead of folding. What am I?"
+            },
+            3: {
+                title: "Chapter III: The Sofa Chamber",
+                text: "Twilight has fallen. What constitutes Karthik’s supreme definition of rest?",
+                options: [
+                    { id: 'A', text: "A. Vigorous mountain scaling" },
+                    { id: 'B', text: "B. Full horizontal lounge mode on the sofa with a display screen and absolute silence" },
+                    { id: 'C', text: "C. Deep-cleaning every chamber of the fortress" },
+                    { id: 'D', text: "D. Crafting complex digital spreadsheets for sport" }
+                ],
+                riddle: "📜 <strong>Riddle:</strong> I boast deep cushions, catch every fallen snack crumb, and serve as the supreme horizontal throne for Karthik’s strategic cinematic vigils. What am I?"
+            },
+            4: {
+                title: "Chapter IV: The Play Chamber",
+                text: "Within the halls of group competition or tabletop trials, how does Karthik execute his strategy?",
+                options: [
+                    { id: 'A', text: "A. Remains wholly passive to let fellow mortals triumph" },
+                    { id: 'B', text: "B. Calculates every single maneuver with fierce mathematical precision" },
+                    { id: 'C', text: "C. Pushes random buttons and chuckles at the chaos" },
+                    { id: 'D', text: "D. Abandoning the quest 5 minutes in" }
+                ],
+                riddle: "📜 <strong>Riddle:</strong> I display lofty scores, test your resolve, and transform rational companions into hyper-competitive strategists who over-analyze every tactical play. What am I?"
+            },
+            5: {
+                title: "Chapter V: The Aquatic Basin",
+                text: "If Karthik rests beside a crystalline pool, what is his exact aura of power?",
+                options: [
+                    { id: 'A', text: "A. Performing continuous cannonballs and backflips" },
+                    { id: 'B', text: "B. Supreme relaxation at the edge wearing shaded lenses and holding a chilled brew" },
+                    { id: 'C', text: "C. Swimming Olympic lengths until muscle failure" },
+                    { id: 'D', text: "D. Remaining indoors upon his laptop forging code" }
+                ],
+                riddle: "📜 <strong>Riddle:</strong> I sparkle beneath open heavens, offering azure tranquility, and reflect Karthik's true essence: supreme chill with shaded lenses, zero ambition to swim laps. What am I?"
+            }
+        };
+
+        let html5QrCode = null;
+        let headerClickCount = 0;
+        let headerClickTimer = null;
+        let currentPlayer = localStorage.getItem('karthik_current_player') || null;
+        let isAdminAuthenticated = sessionStorage.getItem('karthikAdminAuth') === 'true'; 
+        let globalDBCache = { players: {}, releasedResults: {1:false,2:false,3:false,4:false,5:false}, adminAnswers: {1:'',2:'',3:'',4:'',5:''}, winnerBroadcast: null };
+        let modalResolveCallback = null;
+
+        // --- CINEMATIC WEB AUDIO API AMBIENCE (D&D RAIN, STORM, DEVILISH DRONE & THUNDER) ---
+        let audioCtx = null;
+        let isAmbiencePlaying = false;
+        let ambienceGain = null;
+        let noiseNode = null;
+        let droneOsc1 = null;
+        let droneOsc2 = null;
+        let thunderInterval = null;
+
+        window.toggleBackgroundAudio = function() {
+            if (!isAdminAuthenticated) return;
+            
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (isAmbiencePlaying) {
+                stopProceduralAmbience();
+                isAmbiencePlaying = false;
+                speakDungeonMasterAdmin("Atmospheric dungeon weather suspended.");
+            } else {
+                startProceduralAmbience();
+                isAmbiencePlaying = true;
+                speakDungeonMasterAdmin("Dark dungeon tempest, rain, and devilish drone summoned!");
+            }
+        }
+
+        function startProceduralAmbience() {
+            if (!audioCtx) return;
+
+            // Master Gain Node for Ambience Mix
+            ambienceGain = audioCtx.createGain();
+            ambienceGain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+            ambienceGain.connect(audioCtx.destination);
+
+            // 1. TORRENTIAL RAIN SOUNDSCAPE (Filtered Pink/White Noise)
+            const bufferSize = audioCtx.sampleRate * 3;
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+
+            noiseNode = audioCtx.createBufferSource();
+            noiseNode.buffer = noiseBuffer;
+            noiseNode.loop = true;
+
+            const rainFilter = audioCtx.createBiquadFilter();
+            rainFilter.type = 'bandpass';
+            rainFilter.frequency.setValueAtTime(650, audioCtx.currentTime); // Hiss of rainfall
+            rainFilter.Q.setValueAtTime(0.8, audioCtx.currentTime);
+
+            const rainGain = audioCtx.createGain();
+            rainGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+            noiseNode.connect(rainFilter);
+            rainFilter.connect(rainGain);
+            rainGain.connect(ambienceGain);
+            noiseNode.start();
+
+            // 2. DEVILISH DUNGEON DRONE (Ominous low-pitched sub-harmonics)
+            droneOsc1 = audioCtx.createOscillator();
+            droneOsc1.type = 'sawtooth';
+            droneOsc1.frequency.setValueAtTime(46.25, audioCtx.currentTime); // F#1 (Dark fantasy root)
+
+            droneOsc2 = audioCtx.createOscillator();
+            droneOsc2.type = 'triangle';
+            droneOsc2.frequency.setValueAtTime(49.00, audioCtx.currentTime); // G1 (Tritone dissonance for demonic tension)
+
+            const droneFilter = audioCtx.createBiquadFilter();
+            droneFilter.type = 'lowpass';
+            droneFilter.frequency.setValueAtTime(95, audioCtx.currentTime); // Deep rumbling frequency
+
+            const droneGain = audioCtx.createGain();
+            droneGain.gain.setValueAtTime(0.28, audioCtx.currentTime);
+
+            droneOsc1.connect(droneFilter);
+            droneOsc2.connect(droneFilter);
+            droneFilter.connect(droneGain);
+            droneGain.connect(ambienceGain);
+
+            droneOsc1.start();
+            droneOsc2.start();
+
+            // 3. RANDOM PROCEDURAL THUNDER CLAPS
+            thunderInterval = setInterval(() => {
+                if (!isAmbiencePlaying || !audioCtx) return;
+                triggerThunderRumble();
+            }, 14000); // Every 14 seconds a distant rumble
+        }
+
+        function triggerThunderRumble() {
+            if (!audioCtx || !ambienceGain) return;
+            const tLen = audioCtx.sampleRate * 4;
+            const tBuf = audioCtx.createBuffer(1, tLen, audioCtx.sampleRate);
+            const d = tBuf.getChannelData(0);
+            for (let i = 0; i < tLen; i++) {
+                d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 1.2));
+            }
+            const src = audioCtx.createBufferSource();
+            src.buffer = tBuf;
+
+            const f = audioCtx.createBiquadFilter();
+            f.type = 'lowpass';
+            f.frequency.setValueAtTime(140, audioCtx.currentTime);
+
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(0.7, audioCtx.currentTime);
+
+            src.connect(f);
+            f.connect(g);
+            g.connect(ambienceGain);
+            src.start();
+        }
+
+        function stopProceduralAmbience() {
+            if (noiseNode) { try { noiseNode.stop(); } catch(e){} }
+            if (droneOsc1) { try { droneOsc1.stop(); } catch(e){} }
+            if (droneOsc2) { try { droneOsc2.stop(); } catch(e){} }
+            if (thunderInterval) clearInterval(thunderInterval);
+        }
+
+        // --- ADMIN-ONLY CINEMATIC DM SPEECH SYNTHESIS SETUP ---
+        let adminVoiceMuted = false;
+        window.toggleAdminVoice = function() {
+            adminVoiceMuted = !adminVoiceMuted;
+            const btn = document.getElementById('admin-voice-toggle-btn');
+            if (adminVoiceMuted) {
+                btn.innerText = "🔇 DM Voice: OFF";
+                btn.style.background = "rgba(212,175,55,0.2)";
+                btn.style.color = "var(--primary-gold)";
+            } else {
+                btn.innerText = "🔊 DM Voice: ON";
+                btn.style.background = "#374151";
+                btn.style.color = "#fff";
+                speakDungeonMasterAdmin("Voice channels booming upon the big screen.");
+            }
+        }
+
+        window.speakDungeonMasterAdmin = function(text) {
+            if (!isAdminAuthenticated || adminVoiceMuted || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+
+            const cleanText = text.replace(/<[^>]*>?/gm, '');
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.rate = 0.84; // Slower, commanding epic pacing
+            utterance.pitch = 0.48; // Deep, booming, resonant dungeon master bass
+
+            const voices = window.speechSynthesis.getVoices();
+            const preferredVoice = voices.find(v => v.name.includes('Google UK English Male') || v.name.includes('Microsoft David') || v.name.includes('Daniel') || v.lang.includes('en'));
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {};
+        }
+
+        window.showCustomModal = function(title, message, isPrompt = false, defaultValue = "", isDanger = false) {
+            return new Promise((resolve) => {
+                modalResolveCallback = resolve;
+                document.getElementById('modal-title').innerText = title;
+                document.getElementById('modal-title').style.color = isDanger ? 'var(--danger-red)' : 'var(--primary-gold)';
+                document.getElementById('modal-message').innerHTML = message;
+                
+                const inputContainer = document.getElementById('modal-input-container');
+                const inputField = document.getElementById('modal-input');
+                const actionsContainer = document.getElementById('modal-actions-container');
+
+                if (isPrompt) {
+                    inputContainer.classList.remove('hidden');
+                    inputField.value = defaultValue;
+                    inputField.type = title.toLowerCase().includes('passcode') || title.toLowerCase().includes('verification') ? 'password' : 'text';
+                    setTimeout(() => inputField.focus(), 100);
+                    actionsContainer.innerHTML = `
+                        <button style="background: #374151; color: #fff;" onclick="closeModal(false)">Cancel</button>
+                        <button class="${isDanger ? '' : 'vault-btn'}" style="${isDanger ? 'background:var(--danger-red); color:#fff;' : ''}" onclick="closeModal(true, document.getElementById('modal-input').value)">Confirm</button>
+                    `;
+                } else {
+                    inputContainer.classList.add('hidden');
+                    actionsContainer.innerHTML = `
+                        <button class="${isDanger ? '' : 'vault-btn'}" style="${isDanger ? 'background:var(--danger-red); color:#fff;' : ''}" onclick="closeModal(true)">Acknowledge</button>
+                    `;
+                }
+                document.getElementById('custom-modal').classList.remove('hidden');
+            });
+        }
+
+        window.closeModal = function(confirmed, value = null) {
+            document.getElementById('custom-modal').classList.add('hidden');
+            if (modalResolveCallback) {
+                modalResolveCallback(confirmed ? (value !== null ? value : true) : null);
+                modalResolveCallback = null;
+            }
+        }
+
+        onValue(ref(rdb, 'game'), (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                globalDBCache = data;
+                if(!globalDBCache.players) globalDBCache.players = {};
+                if(!globalDBCache.releasedResults) globalDBCache.releasedResults = {1:false,2:false,3:false,4:false,5:false};
+                if(!globalDBCache.adminAnswers) globalDBCache.adminAnswers = {1:'',2:'',3:'',4:'',5:''};
+            }
+            renderState();
+            if (!document.getElementById('screen-admin').classList.contains('hidden')) {
+                renderAdminPanelContent();
+            }
+        });
+
+        document.getElementById('main-header').addEventListener('click', () => {
+            headerClickCount++;
+            if (headerClickCount === 1) {
+                headerClickTimer = setTimeout(() => { headerClickCount = 0; }, 800);
+            } else {
+                if (headerClickCount === 3) {
+                    clearTimeout(headerClickTimer);
+                    headerClickCount = 0;
+                    promptForAdmin();
+                }
+            }
+        });
+
+        async function promptForAdmin() {
+            if (isAdminAuthenticated) {
+                openAdminPanel();
+                return;
+            }
+
+            const passcode = await showCustomModal("🔒 Grimoire Verification", "Inscribe the Admin Passcode to open the Grimoire:", true, "", false);
+            if (passcode === "vegas2026") {
+                isAdminAuthenticated = true;
+                sessionStorage.setItem('karthikAdminAuth', 'true');
+                openAdminPanel();
+            } else {
+                if (passcode !== null) {
+                    await showCustomModal("Access Denied", "❌ Incorrect passcode.", false, "", true);
+                }
+            }
+        }
+
+        function openAdminPanel() {
+            window.stopScanner();
+            hideAll();
+            const newUrl = window.location.pathname + "?admin=true";
+            window.history.replaceState({}, document.title, newUrl);
+            document.getElementById('screen-admin').classList.remove('hidden');
+            renderAdminPanelContent();
+        }
+
+        window.closeAdminPanel = function() {
+            isAdminAuthenticated = false;
+            sessionStorage.removeItem('karthikAdminAuth');
+            window.history.replaceState({}, document.title, window.location.pathname);
+            document.getElementById('screen-admin').classList.add('hidden');
+            renderState();
+        }
+
+        function updateCloudDB(path, value) {
+            set(ref(rdb, 'game/' + path), value);
+        }
+
+        window.registerPlayer = async function() {
+            const nameInput = document.getElementById('player-name-input').value.trim();
+            if (!nameInput) {
+                await showCustomModal("Invalid Name", "Please enter a valid adventurer name or team tag!", false, "", true);
+                return;
+            }
+
+            currentPlayer = nameInput;
+            localStorage.setItem('karthik_current_player', currentPlayer);
+
+            const pRef = ref(rdb, 'game/players/' + currentPlayer);
+            onValue(pRef, (snapshot) => {
+                if (!snapshot.exists()) {
+                    set(pRef, {
+                        score: 100,
+                        currentStage: 1,
+                        status: 'active',
+                        selectedAnswer: null,
+                        wrongAttempts: 0
+                    });
+                }
+            }, { onlyOnce: true });
+            renderState();
+        }
+
+        window.forceCheckUpdate = function() {
+            renderState();
+        }
+
+        async function renderState() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.get('admin') === 'true') {
+                if (isAdminAuthenticated) {
+                    hideAll();
+                    document.getElementById('screen-admin').classList.remove('hidden');
+                    renderAdminPanelContent();
+                    return;
+                }
+
+                if (!document.getElementById('custom-modal').classList.contains('hidden') && document.getElementById('modal-title').innerText.includes("Grimoire Verification")) {
+                    return; 
+                }
+
+                hideAll();
+                const passcode = await showCustomModal("🔒 Grimoire Verification", "Inscribe the Admin Passcode:", true, "", false);
+                
+                if (passcode === "vegas2026") {
+                    isAdminAuthenticated = true;
+                    sessionStorage.setItem('karthikAdminAuth', 'true');
+                    document.getElementById('screen-admin').classList.remove('hidden');
+                    renderAdminPanelContent();
+                    return;
+                } else {
+                    if (passcode !== null) {
+                        await showCustomModal("Access Denied", "❌ Incorrect passcode.", false, "", true);
+                    }
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    renderState(); 
+                    return;
+                }
+            }
+
+            if (!document.getElementById('screen-admin').classList.contains('hidden')) {
+                return;
+            }
+
+            window.stopScanner();
+            hideAll();
+
+            if (globalDBCache.winnerBroadcast) {
+                document.getElementById('screen-winner-broadcast').classList.remove('hidden');
+                renderWinnerBroadcastDetails(globalDBCache.winnerBroadcast);
+                return;
+            }
+
+            if (!currentPlayer) {
+                document.getElementById('screen-register').classList.remove('hidden');
+                return;
+            }
+
+            let pData = globalDBCache.players[currentPlayer];
+            if (!pData) {
+                let newP = { score: 100, currentStage: 1, status: 'active', selectedAnswer: null, wrongAttempts: 0 };
+                updateCloudDB('players/' + currentPlayer, newP);
+                pData = newP;
+            }
+
+            document.getElementById('user-badge').innerText = `Adventurer: ${currentPlayer} | Honor: ${pData.score} pts`;
+
+            const scannedStation = parseInt(urlParams.get('station') || '0');
+
+            if (scannedStation > 0) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+
+                if (scannedStation > pData.currentStage && pData.currentStage <= 5) {
+                    await showCustomModal("Wrong Sector", `🚨 WRONG SECTOR! You must conquer Chapter ${pData.currentStage} before scanning portal ${scannedStation}!`, false, "", true);
+                    renderState();
+                    return;
+                }
+
+                if (scannedStation === pData.currentStage && pData.status === 'active') {
+                    updateCloudDB(`players/${currentPlayer}/status`, 'answering');
+                    return;
+                }
+            }
+
+            if (pData.status === 'locked' || pData.status === 'wrong_twice') {
+                document.getElementById('screen-locked').classList.remove('hidden');
+                let penaltyText = pData.status === 'wrong_twice' ? "You failed twice. Summon the Dungeon Master to unlock your path and advance." : "You missed the target rune and triggered security wards (-5 honor). Summon the Dungeon Master to lift the seal.";
+                document.getElementById('lock-message').innerText = penaltyText;
+                document.getElementById('lock-status-text').innerText = `Current Chapter: ${pData.currentStage} | Status: Sealed`;
+                return;
+            }
+
+            if (pData.currentStage > 5 || pData.status === 'stage6') {
+                document.getElementById('screen-stage6').classList.remove('hidden');
+                return;
+            }
+
+            if (pData.status === 'answering' || pData.status === 'waiting_result') {
+                const stageNum = pData.currentStage;
+                const stageInfo = stagesData[stageNum];
+                document.getElementById('screen-question').classList.remove('hidden');
+                document.getElementById('question-title').innerText = stageInfo.title;
+                document.getElementById('question-text').innerText = stageInfo.text;
+
+                if (globalDBCache.releasedResults[stageNum]) {
+                    checkLiveEvaluation(pData, stageNum);
+                    return;
+                }
+
+                if (pData.status === 'waiting_result') {
+                    document.getElementById('options-container').innerHTML = `<p style="color:var(--primary-gold); text-align:center;">Sealed Rune Choice: <strong>${pData.selectedAnswer || 'None'}</strong></p>`;
+                    document.getElementById('submit-ans-btn').classList.add('hidden');
+                    document.getElementById('waiting-result-section').classList.remove('hidden');
+                } else {
+                    document.getElementById('waiting-result-section').classList.add('hidden');
+                    let optHtml = '';
+                    stageInfo.options.forEach(opt => {
+                        let isSel = pData.selectedAnswer === opt.id ? 'selected' : '';
+                        optHtml += `<button class="option-btn ${isSel}" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+                    });
+                    document.getElementById('options-container').innerHTML = optHtml;
+                    if (pData.selectedAnswer) {
+                        document.getElementById('submit-ans-btn').classList.remove('hidden');
+                    } else {
+                        document.getElementById('submit-ans-btn').classList.add('hidden');
+                    }
+                }
+                return;
+            }
+
+            document.getElementById('screen-checkpoint').classList.remove('hidden');
+            const currentStageNum = pData.currentStage || 1;
+            const activeRiddle = stagesData[currentStageNum].riddle;
+            document.getElementById('riddle-text').innerHTML = `📜 <strong>Chapter ${currentStageNum} Prophecy:</strong> ${activeRiddle}`;
+        }
+
+        window.selectOption = function(optId) {
+            let pData = globalDBCache.players[currentPlayer];
+            if (pData && pData.status === 'waiting_result') return;
+
+            updateCloudDB(`players/${currentPlayer}/selectedAnswer`, optId);
+            if(pData) pData.selectedAnswer = optId;
+            let stageNum = pData ? pData.currentStage : 1;
+            let stageInfo = stagesData[stageNum];
+            let optHtml = '';
+            stageInfo.options.forEach(opt => {
+                let isSel = optId === opt.id ? 'selected' : '';
+                optHtml += `<button class="option-btn ${isSel}" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+            });
+            document.getElementById('options-container').innerHTML = optHtml;
+            document.getElementById('submit-ans-btn').classList.remove('hidden');
+        }
+
+        window.submitAnswerSelection = async function() {
+            let pData = globalDBCache.players[currentPlayer];
+            if (!pData || !pData.selectedAnswer) {
+                await showCustomModal("Notice", "Please select an option first!", false, "", true);
+                return;
+            }
+            if (pData.status === 'waiting_result') return;
+            updateCloudDB(`players/${currentPlayer}/status`, 'waiting_result');
+        }
+
+        async function checkLiveEvaluation(pData, stageNum) {
+            const correctOpt = globalDBCache.adminAnswers[stageNum];
+            if (!correctOpt) {
+                await showCustomModal("Warning", "⚠️ The Dungeon Master has proclaimed results, but omitted the correct rune key in the Grimoire!", false, "", true);
+                return;
+            }
+
+            let updates = {};
+            if (pData.selectedAnswer === correctOpt) {
+                let nextStage = pData.currentStage + 1;
+                updates[`players/${currentPlayer}/currentStage`] = nextStage;
+                updates[`players/${currentPlayer}/selectedAnswer`] = null;
+                updates[`players/${currentPlayer}/status`] = nextStage > 5 ? 'stage6' : 'active';
+                updates[`players/${currentPlayer}/wrongAttempts`] = 0;
+                update(ref(rdb, 'game'), updates);
+
+                speakDungeonMasterAdmin(`Hooray! Rahul got it right! Magnificent trial conquered!`);
+
+                if (nextStage > 5) {
+                    await showCustomModal("Trial Conquered!", "✨ Splendid! All physical sectors cleared! Proceed to Karthik's final sanctuary riddle.");
+                } else {
+                    let nextRiddle = stagesData[nextStage].riddle.replace(/<[^>]*>?/gm, '');
+                    await showCustomModal("Sector Conquered!", `✨ Splendid! Sector unlocked.<br><br><strong>Next Portal Prophecy:</strong><br>${nextRiddle}`);
+                }
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else {
+                let newAttempts = (pData.wrongAttempts || 0) + 1;
+                updates[`players/${currentPlayer}/wrongAttempts`] = newAttempts;
+                updates[`players/${currentPlayer}/selectedAnswer`] = null;
+                
+                if (newAttempts >= 2) {
+                    updates[`players/${currentPlayer}/status`] = 'wrong_twice';
+                    updates[`players/${currentPlayer}/score`] = Math.max(0, pData.score - 5);
+                } else {
+                    updates[`players/${currentPlayer}/status`] = 'locked';
+                    updates[`players/${currentPlayer}/score`] = Math.max(0, pData.score - 5);
+                }
+                update(ref(rdb, 'game'), updates);
+                
+                speakDungeonMasterAdmin(`Rah, that's a wrong answer! You have to ask me to unlock you or advance!`);
+                await showCustomModal("Incorrect", "❌ Rah, that's a wrong answer! Sector sealed (-5 honor). You have to ask me to unlock you or advance.", false, "", true);
+            }
+        }
+
+        function renderWinnerBroadcastDetails(winnerData) {
+            if (!winnerData) return;
+            document.getElementById('broadcast-winner-name').innerText = winnerData.name;
+            document.getElementById('broadcast-winner-stats').innerText = `Final Honor: ${winnerData.score} pts | Conquered All Chapters`;
+
+            let podiumHtml = '';
+            if (winnerData.podium && winnerData.podium.length > 0) {
+                winnerData.podium.forEach((item, index) => {
+                    let medal = index === 0 ? '🥇' : (index === 1 ? '🥈' : (index === 2 ? '🥉' : '🔹'));
+                    podiumHtml += `<div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(212,175,55,0.1);">
+                        <span>${medal} <strong>${item.name}</strong></span>
+                        <span style="color:var(--primary-gold);">${item.score} pts</span>
+                    </div>`;
+                });
+            } else {
+                podiumHtml = '<span>No other rankings recorded.</span>';
+            }
+            document.getElementById('broadcast-podium-list').innerHTML = podiumHtml;
+        }
+
+        window.triggerDeclareWinner = async function() {
+            let players = globalDBCache.players;
+            if (!players || Object.keys(players).length === 0) {
+                await showCustomModal("Error", "No adventurers registered in the realm yet!", false, "", true);
+                return;
+            }
+
+            let playerList = [];
+            for (let name in players) {
+                playerList.push({ name: name, score: players[name].score || 0, stage: players[name].currentStage || 1 });
+            }
+            playerList.sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                return b.stage - a.stage;
+            });
+
+            let topWinner = playerList[0];
+            let topPodium = playerList.slice(0, 5);
+
+            let winnerPayload = {
+                name: topWinner.name,
+                score: topWinner.score,
+                podium: topPodium
+            };
+
+            updateCloudDB('winnerBroadcast', winnerPayload);
+            speakDungeonMasterAdmin(`Hear ye, hear ye! The grand campaign concludes! The ultimate champion is ${topWinner.name}! Hooray!`);
+            await showCustomModal("Proclamation Sent!", `📢 Champion proclaimed successfully! <strong>${topWinner.name}</strong> now reigns supreme on all screens.`);
+        }
+
+        window.cancelDeclareWinner = function() {
+            updateCloudDB('winnerBroadcast', null);
+        }
+
+        window.verifyMasterRoom = async function() {
+            let roomInput = document.getElementById('room-name-input').value.trim().toUpperCase();
+            
+            if (roomInput === "MAS") {
+                document.getElementById('room-success-msg').classList.remove('hidden');
+                speakDungeonMasterAdmin("Sanctuary unlocked! Hooray, Karthik has claimed ultimate victory!");
+                await showCustomModal(
+                    "Sanctuary Unlocked!", 
+                    "🎉 Access Granted! You possess absolute mastery over Sriya. Witness the sanctuary vault location upon your screen!"
+                );
+            } else {
+                speakDungeonMasterAdmin("Rah, that is not what Sriya would do. Try again!");
+                await showCustomModal(
+                    "Incorrect Runes", 
+                    "❌ That is not what Sriya would do... Try again!", 
+                    false, "", true
+                );
+            }
+        }
+
+        window.startScanner = function() {
+            document.getElementById('reader').classList.remove('hidden');
+            document.getElementById('stop-scanner-btn').classList.remove('hidden');
+
+            html5QrCode = new Html5Qrcode("reader");
+            html5QrCode.start(
+                { facingMode: "environment" },
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                (decodedText, decodedResult) => {
+                    window.stopScanner();
+                    try {
+                        const url = new URL(decodedText);
+                        const station = url.searchParams.get('station');
+                        if (station !== null) {
+                            window.location.href = decodedText;
+                        } else {
+                            showCustomModal("Invalid Portal", "❌ Invalid portal rune scanned!", false, "", true);
+                        }
+                    } catch (e) {
+                        showCustomModal("Invalid Portal", "❌ Scanned code is not a valid realm URL.", false, "", true);
+                    }
+                },
+                (errorMessage) => {}
+            ).catch(async (err) => {
+                await showCustomModal("Portal Error", "Camera vision denied or unavailable.", false, "", true);
+            });
+        }
+
+        window.stopScanner = function() {
+            if (html5QrCode) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode.clear();
+                }).catch(err => {
+                    console.log("Scanner stop error", err);
+                });
+            }
+            document.getElementById('reader').classList.add('hidden');
+            document.getElementById('stop-scanner-btn').classList.add('hidden');
+        }
+
+        window.requestUnlock = async function() {
+            speakDungeonMasterAdmin("An adventurer demands an audience and unsealing. Summon the Master!");
+            await showCustomModal("Summoning Dispatched", "📢 Dungeon Master summoned! Seek your Master, offer tribute, and demand your ward be lifted.");
+        }
+
+        function renderAdminPanelContent() {
+            let controlsHtml = '';
+            for (let s = 1; s <= 5; s++) {
+                let released = globalDBCache.releasedResults[s];
+                let currentAns = globalDBCache.adminAnswers[s] || '';
+                controlsHtml += `<div style="margin-bottom: 14px; border-bottom: 1px solid rgba(212,175,55,0.1); padding-bottom: 10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+                        <strong>${stagesData[s].title}</strong>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <span style="font-size:11px; color:var(--primary-gold);">Correct Rune:</span>
+                            <input type="text" style="width:45px; padding:4px; text-align:center; margin:0; font-size:12px; background:rgba(0,0,0,0.6); border:1px solid var(--primary-gold); color:#fff; border-radius:4px;" maxlength="1" value="${currentAns}" onchange="updateAdminAnswer(${s}, this.value)">
+                        </div>
+                    </div>
+                    <div>
+                        <button style="padding:8px 12px; font-size:12px; margin:0; background:${released ? '#374151' : 'var(--primary-gold)'}; color:${released ? '#fff' : '#000'};" onclick="releaseLiveResult(${s})">${released ? 'Verdict Released Live (Active)' : '📢 Proclaim Verdict Live (Allow Refresh)'}</button>
+                    </div>
+                </div>`;
+            }
+            document.getElementById('admin-controls-container').innerHTML = controlsHtml;
+
+            let tableHtml = `<table>
+                <thead>
+                    <tr>
+                        <th>Adventurer</th>
+                        <th>Honor</th>
+                        <th>Chapter</th>
+                        <th>Rune</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            let players = globalDBCache.players;
+            if (!players || Object.keys(players).length === 0) {
+                tableHtml += `<tr><td colspan="6">No adventurers registered yet.</td></tr>`;
+            } else {
+                for (let name in players) {
+                    let p = players[name];
+                    let actionBtn = '—';
+                    if (p.status === 'locked' || p.status === 'wrong_twice') {
+                        actionBtn = `<button style="padding:4px 8px; font-size:10px; margin:0;" onclick="adminUnlockPlayer('${name}')">Unlock</button> <button style="padding:4px 8px; font-size:10px; margin:0; background:var(--primary-gold); color:#000;" onclick="adminOverrideAdvance('${name}')">Advance</button>`;
+                    }
+                    tableHtml += `<tr>
+                        <td><strong>${name}</strong></td>
+                        <td style="color: var(--primary-gold);">${p.score}</td>
+                        <td>${p.currentStage}</td>
+                        <td style="color: #38bdf8;">${p.selectedAnswer ? 'Rune ' + p.selectedAnswer : '—'}</td>
+                        <td style="color: ${p.status.includes('locked') || p.status === 'wrong_twice' ? 'var(--danger-red)' : 'var(--primary-gold)'};">${p.status}</td>
+                        <td>${actionBtn}</td>
+                    </tr>`;
+                }
+            }
+            tableHtml += `</tbody></table>`;
+            document.getElementById('admin-table-container').innerHTML = tableHtml;
+        }
+
+        window.updateAdminAnswer = function(stageNum, val) {
+            updateCloudDB(`adminAnswers/${stageNum}`, val.toUpperCase().trim());
+        }
+
+        window.releaseLiveResult = async function(stageNum) {
+            if (!globalDBCache.adminAnswers[stageNum]) {
+                await showCustomModal("Missing Rune", "⚠️ Please inscribe the correct rune (A, B, C, or D) in the box for this chapter first!", false, "", true);
+                return;
+            }
+            updateCloudDB(`releasedResults/${stageNum}`, true);
+            speakDungeonMasterAdmin(`Hear the Dungeon Master's decree! Verdict for Chapter ${stageNum} is now proclaimed across the realm!`);
+            renderAdminPanelContent();
+        }
+
+        window.adminUnlockPlayer = function(playerName) {
+            const p = globalDBCache.players[playerName];
+            const updates = {};
+            
+            updates[`players/${playerName}/status`] = 'answering';
+            updates[`players/${playerName}/selectedAnswer`] = null;
+            updates[`players/${playerName}/wrongAttempts`] = 0;
+            
+            if (p && p.currentStage <= 5) {
+                updates[`releasedResults/${p.currentStage}`] = false;
+            }
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+            speakDungeonMasterAdmin(`Wards lifted for ${playerName}. Path opened.`);
+            update(ref(rdb, 'game'), updates).then(() => {
+                renderAdminPanelContent();
+            });
+        }
+
+        window.adminOverrideAdvance = function(playerName) {
+            const p = globalDBCache.players[playerName];
+            if (p) {
+                const nextStage = p.currentStage + 1;
+                const dbUpdates = {};
+                
+                dbUpdates[`players/${playerName}/score`] = Math.max(0, p.score - 10); 
+                dbUpdates[`players/${playerName}/currentStage`] = nextStage;
+                dbUpdates[`players/${playerName}/status`] = nextStage > 5 ? 'stage6' : 'active';
+                dbUpdates[`players/${playerName}/selectedAnswer`] = null;
+                dbUpdates[`players/${playerName}/wrongAttempts`] = 0;
+                
+                window.history.replaceState({}, document.title, window.location.pathname);
+                speakDungeonMasterAdmin(`By decree, ${playerName} is advanced to the next chapter.`);
+                update(ref(rdb, 'game'), dbUpdates).then(() => {
+                    renderAdminPanelContent();
+                });
+            }
+        }
+
+        window.resetEntireDatabase = async function() {
+            const confirmed = await showCustomModal("⚠️ Purge Grimoire", "Are you sure you want to purge all adventurers and reset the realm back to Chapter I?", true, "", true);
+            if (confirmed !== null) {
+                set(ref(rdb, 'game'), {
+                    players: {},
+                    releasedResults: {1:false, 2:false, 3:false, 4:false, 5:false},
+                    adminAnswers: {1:'', 2:'', 3:'', 4:'', 5:''},
+                    winnerBroadcast: null
+                });
+                speakDungeonMasterAdmin("The Grimoire has been purged. The realm resets from the ashes.");
+                await showCustomModal("Purge Complete", "🧹 Grimoire wiped clean! Realm restored.");
+            }
+        }
+
+        function hideAll() {
+            document.getElementById('screen-register').classList.add('hidden');
+            document.getElementById('screen-checkpoint').classList.add('hidden');
+            document.getElementById('screen-locked').classList.add('hidden');
+            document.getElementById('screen-question').classList.add('hidden');
+            document.getElementById('screen-stage6').classList.add('hidden');
+            document.getElementById('screen-winner-broadcast').classList.add('hidden');
+            document.getElementById('screen-admin').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
