@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Become Karthik | Vegas Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #070913;
+            --card-bg: rgba(17, 24, 39, 0.85);
+            --primary-neon: #00ff88;
+            --secondary-neon: #ff007f;
+            --accent-gold: #ffcc00;
+            --text-main: #e2e8f0;
+            --danger-red: #ff3333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(255, 0, 127, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 20% 90%, rgba(0, 255, 136, 0.1) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--primary-neon);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: #94a3b8;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.4s ease-out forwards;
+            margin-bottom: 15px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        button {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, var(--primary-neon), #00cc6a);
+            color: #070913;
+            border: none;
+            padding: 14px 20px;
+            margin: 12px 0 0 0;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .option-btn {
+            background: rgba(31, 41, 55, 0.6);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+            box-shadow: none;
+        }
+
+        .option-btn:hover {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: var(--primary-neon);
+            color: var(--primary-neon);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary-neon);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin: 10px 0;
+            outline: none;
+        }
+
+        .vault-input {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .vault-btn {
+            background: linear-gradient(135deg, var(--accent-gold), #ffaa00);
+            color: #070913;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .danger-box {
+            border-color: var(--danger-red);
+        }
+        .danger-box::before {
+            background: var(--danger-red);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary-neon);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+        }
+
+        .hidden { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container" onclick="handleHeaderClick()">
+        <h1>🎲 BECOME KARTHIK</h1>
+        <div class="subtitle" id="user-badge">Vegas Simulation Protocol</div>
+    </div>
+
+    <!-- REGISTRATION SCREEN -->
+    <div id="screen-register" class="card">
+        <h3>👤 Enter Player / Team Name</h3>
+        <p>Before entering the Vegas grid, register your name or team tag to track your simulation score.</p>
+        <input type="text" id="player-name-input" class="text-input" placeholder="e.g. Team Vegas / Rahul">
+        <button onclick="registerPlayer()">Enter Simulation</button>
+    </div>
+
+    <!-- SCANNER / CHECKPOINT LOCK -->
+    <div id="screen-checkpoint" class="card hidden">
+        <h3>🚨 Checkpoint Scan Required</h3>
+        <p id="checkpoint-msg">Scan a physical station QR code around the room to load your current challenge!</p>
+    </div>
+
+    <!-- LOCKED OUT SCREEN -->
+    <div id="screen-locked" class="card danger-box hidden">
+        <h3 style="color: var(--danger-red);">🔒 Sector Locked Out!</h3>
+        <p>You missed the target answer and triggered security protocols. Your station is locked!</p>
+        <p style="color: var(--accent-gold);"><strong>Penalty Imminent:</strong> You must request an Admin Override (-5 Points) by completing a real-world favor for the host.</p>
+        <p id="lock-status-text" style="font-size: 12px; color: #94a3b8; margin-top: 10px;"></p>
+        <button style="background: var(--danger-red); color: #fff;" onclick="requestUnlock()">Ask Admin for Access</button>
+    </div>
+
+    <!-- QUESTION STAGES -->
+    <div id="screen-question" class="card hidden">
+        <h3 id="question-title">Stage Title</h3>
+        <p id="question-text">Question description goes here...</p>
+        <div id="options-container"></div>
+    </div>
+
+    <!-- FINAL VAULT -->
+    <div id="screen-vault" class="card hidden" style="border-color: var(--accent-gold);">
+        <h3 style="color: var(--accent-gold);">Analysis Complete…</h3>
+        <p>Behavioral Similarity to Karthik: <strong style="color: #fff;">94%</strong>.</p>
+        <p style="color: var(--accent-gold);">The only person who can truly bypass security and unlock Karthik’s Vault… is Karthik.</p>
+        <input type="password" id="pin-input" class="text-input vault-input" placeholder="ENTER SECRET CODE">
+        <button class="vault-btn" onclick="unlockVault()">Unlock Vault</button>
+        <p id="vault-msg" class="hidden" style="color: var(--primary-neon); font-weight: bold; margin-top: 15px; text-align: center;">🎉 VAULT UNLOCKED! Happy Birthday Karthik! Enjoy your gift!</p>
+    </div>
+
+    <!-- ADMIN PANEL OVERLAY (Hidden by password prompt) -->
+    <div id="screen-admin" class="card hidden" style="border-color: var(--secondary-neon);">
+        <h3 style="color: var(--secondary-neon);">🛠️ Admin Control Panel</h3>
+        <p style="font-size: 12px; color: #94a3b8;">Manage player scores and unlock locked stations.</p>
+        
+        <div style="margin-top: 15px;">
+            <h4 style="color: #fff; font-size: 14px; margin-bottom: 5px;">Player Leaderboard & Statuses</h4>
+            <div id="admin-table-container"></div>
+        </div>
+        
+        <button style="background: #374151; color: #fff; margin-top: 15px;" onclick="closeAdminPanel()">Close Admin Panel</button>
+    </div>
+
+    <script>
+        const stagesData = {
+            1: {
+                title: "Stage 1: The Bellagio Buffet",
+                text: "Karthik walks into the legendary buffet layout. What's his immediate tactical move?",
+                options: [
+                    { id: 'A', text: "A. Dessert first" },
+                    { id: 'B', text: "B. Find seafood" },
+                    { id: 'C', text: "C. Look for the biggest steak" },
+                    { id: 'D', text: "D. Eat whatever everyone else is having" }
+                ],
+                correct: 'B'
+            },
+            2: {
+                title: "Stage 2: The Casino Floor",
+                text: "You have $100 in hand. What would Karthik naturally do next?",
+                options: [
+                    { id: 'A', text: "A. Go all-in on one hand." },
+                    { id: 'B', text: "B. Play cautiously." },
+                    { id: 'C', text: "C. Walk away and watch everyone else." },
+                    { id: 'D', text: "D. Spend it on food instead." }
+                ],
+                correct: 'B'
+            },
+            3: {
+                title: "Stage 3: The Club",
+                text: "The bass is thumping and everyone wants to hit the dance floor. Karthik would:",
+                options: [
+                    { id: 'A', text: "A. Be first on the dance floor." },
+                    { id: 'B', text: "B. Need convincing." },
+                    { id: 'C', text: "C. Become the DJ." },
+                    { id: 'D', text: "D. Stay at the table." }
+                ],
+                correct: 'D'
+            }
+        };
+
+        let headerClickCount = 0;
+        let headerClickTimer = null;
+
+        function handleHeaderClick() {
+            // Secret Trigger: Triple-tap the header title quickly to prompt for admin password
+            headerClickCount++;
+            if (headerClickCount === 1) {
+                headerClickTimer = setTimeout(() => { headerClickCount = 0; }, 800);
+            } else if (headerClickCount === 3) {
+                clearTimeout(headerClickTimer);
+                headerClickCount = 0;
+                promptForAdmin();
+            }
+        }
+
+        function promptForAdmin() {
+            const passcode = prompt("🔒 Enter Admin Passcode:");
+            // Set your secret admin passcode here (e.g. "vegas2026")
+            if (passcode === "vegas2026") {
+                openAdminPanel();
+            } else if (passcode !== null) {
+                alert("❌ Incorrect passcode.");
+            }
+        }
+
+        function openAdminPanel() {
+            hideAll();
+            document.getElementById('screen-admin').classList.remove('hidden');
+            renderAdminTable();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('screen-admin').classList.add('hidden');
+            renderState();
+        }
+
+        function getDB() {
+            let db = localStorage.getItem('karthik_game_db');
+            if (!db) {
+                db = { players: {} };
+                localStorage.setItem('karthik_game_db', JSON.stringify(db));
+                return db;
+            }
+            return JSON.parse(db);
+        }
+
+        function saveDB(db) {
+            localStorage.setItem('karthik_game_db', JSON.stringify(db));
+        }
+
+        let currentPlayer = localStorage.getItem('karthik_current_player') || null;
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const scannedStation = urlParams.get('station');
+
+            if (scannedStation) {
+                if (!currentPlayer) {
+                    hideAll();
+                    document.getElementById('screen-register').classList.remove('hidden');
+                    alert("Please register your name before joining the simulation station!");
+                } else {
+                    handleStationScan(parseInt(scannedStation));
+                }
+            } else {
+                renderState();
+            }
+        };
+
+        function registerPlayer() {
+            const nameInput = document.getElementById('player-name-input').value.trim();
+            if (!nameInput) {
+                alert("Please enter a valid name or team tag!");
+                return;
+            }
+
+            currentPlayer = nameInput;
+            localStorage.setItem('karthik_current_player', currentPlayer);
+
+            let db = getDB();
+            if (!db.players[currentPlayer]) {
+                db.players[currentPlayer] = {
+                    score: 100,
+                    currentStage: 1,
+                    status: 'active',
+                    lastStationScanned: 0
+                };
+                saveDB(db);
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const scannedStation = urlParams.get('station');
+            if (scannedStation) {
+                handleStationScan(parseInt(scannedStation));
+            } else {
+                renderState();
+            }
+        }
+
+        function handleStationScan(stationNum) {
+            let db = getDB();
+            let pData = db.players[currentPlayer];
+
+            if (!pData) {
+                registerPlayer();
+                return;
+            }
+
+            pData.lastStationScanned = stationNum;
+            saveDB(db);
+
+            if (stationNum > pData.currentStage && pData.status !== 'vault') {
+                alert(`🚨 WRONG STATION! You haven't unlocked Stage ${stationNum} yet. Go back to your assigned sector!`);
+                renderState();
+                return;
+            }
+
+            renderState();
+        }
+
+        function renderState() {
+            hideAll();
+            if (!currentPlayer) {
+                document.getElementById('screen-register').classList.remove('hidden');
+                return;
+            }
+
+            let db = getDB();
+            let pData = db.players[currentPlayer];
+
+            document.getElementById('user-badge').innerText = `Player: ${currentPlayer} | Score: ${pData.score} pts`;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const scannedStation = parseInt(urlParams.get('station') || '0');
+
+            if (scannedStation === 0) {
+                document.getElementById('screen-checkpoint').classList.remove('hidden');
+                document.getElementById('checkpoint-msg').innerText = `Welcome back, ${currentPlayer}! Scan any physical station QR code around the room to load your challenge.`;
+                return;
+            }
+
+            if (pData.status === 'locked') {
+                document.getElementById('screen-locked').classList.remove('hidden');
+                document.getElementById('lock-status-text').innerText = `Current Station: Stage ${scannedStation} | Status: Locked out.`;
+                return;
+            }
+
+            if (pData.currentStage > 3 || pData.status === 'vault') {
+                document.getElementById('screen-vault').classList.remove('hidden');
+                return;
+            }
+
+            const stageInfo = stagesData[pData.currentStage];
+            if (stageInfo) {
+                document.getElementById('screen-question').classList.remove('hidden');
+                document.getElementById('question-title').innerText = stageInfo.title;
+                document.getElementById('question-text').innerText = stageInfo.text;
+                
+                let optHtml = '';
+                stageInfo.options.forEach(opt => {
+                    optHtml += `<button class="option-btn" onclick="submitAnswer(${pData.currentStage}, '${opt.id}')">${opt.text}</button>`;
+                });
+                document.getElementById('options-container').innerHTML = optHtml;
+            }
+        }
+
+        function submitAnswer(stageNum, choice) {
+            let db = getDB();
+            let pData = db.players[currentPlayer];
+            const stageInfo = stagesData[stageNum];
+
+            if (choice === stageInfo.correct) {
+                alert("✨ Correct decision pattern matched! Sector cleared.");
+                pData.currentStage++;
+                if (pData.currentStage > 3) {
+                    pData.status = 'vault';
+                }
+                saveDB(db);
+                renderState();
+            } else {
+                pData.status = 'locked';
+                pData.score = Math.max(0, pData.score - 5);
+                saveDB(db);
+                alert("❌ Mismatch! Sector locked down. You lost 5 points!");
+                renderState();
+            }
+        }
+
+        function requestUnlock() {
+            alert(`📢 Request sent to Admin! Find the host, perform your requested favor, and ask them to unlock your terminal.`);
+        }
+
+        function renderAdminTable() {
+            let db = getDB();
+            let html = `<table>
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Stage</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            let players = db.players;
+            if (Object.keys(players).length === 0) {
+                html += `<tr><td colspan="5">No players registered yet.</td></tr>`;
+            } else {
+                for (let name in players) {
+                    let p = players[name];
+                    html += `<tr>
+                        <td><strong>${name}</strong></td>
+                        <td style="color: var(--accent-gold);">${p.score}</td>
+                        <td>${p.currentStage}</td>
+                        <td style="color: ${p.status === 'locked' ? 'var(--danger-red)' : 'var(--primary-neon)'};">${p.status}</td>
+                        <td>
+                            ${p.status === 'locked' ? `<button style="padding:4px 8px; font-size:10px; margin:0;" onclick="adminUnlock('${name}')">Grant Access</button>` : '—'}
+                        </td>
+                    </tr>`;
+                }
+            }
+            html += `</tbody></table>`;
+            document.getElementById('admin-table-container').innerHTML = html;
+        }
+
+        function adminUnlock(playerName) {
+            let db = getDB();
+            if (db.players[playerName]) {
+                db.players[playerName].status = 'active';
+                db.players[playerName].score = Math.max(0, db.players[playerName].score - 5);
+                saveDB(db);
+                renderAdminTable();
+                alert(`🔓 Access granted for ${playerName}! (-5 retry fee applied).`);
+            }
+        }
+
+        function unlockVault() {
+            const pin = document.getElementById('pin-input').value;
+            if (pin === "1234" || pin.toLowerCase() === "karthik") {
+                document.getElementById('vault-msg').classList.remove('hidden');
+            } else {
+                alert("Incorrect code! Only Karthik knows this.");
+            }
+        }
+
+        function hideAll() {
+            document.getElementById('screen-register').classList.add('hidden');
+            document.getElementById('screen-checkpoint').classList.add('hidden');
+            document.getElementById('screen-locked').classList.add('hidden');
+            document.getElementById('screen-question').classList.add('hidden');
+            document.getElementById('screen-vault').classList.add('hidden');
+            document.getElementById('screen-admin').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
