@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📜 Ultimate Vault Code | Cinematic Dungeon Master Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=IM+Fell+English+SC&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    
+    <style>
+        :root {
+            --bg-color: #0b0907;
+            --card-bg: rgba(22, 18, 14, 0.92);
+            --primary-gold: #d4af37;
+            --secondary-gold: #f3e5ab;
+            --accent-red: #8b0000;
+            --text-main: #e2d8c3;
+            --danger-red: #ff3333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 90%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--primary-gold);
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'IM Fell English SC', serif;
+            font-size: 13px;
+            color: #bfa15f;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.4s ease-out forwards;
+            margin-bottom: 15px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--accent-red));
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: var(--secondary-gold);
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #d1c7b7;
+        }
+
+        button {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, var(--primary-gold), #b38f27);
+            color: #0b0907;
+            border: none;
+            padding: 14px 20px;
+            margin: 12px 0 0 0;
+            width: 100%;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .option-btn {
+            background: rgba(35, 28, 22, 0.8);
+            color: var(--text-main);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: left;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+            box-shadow: none;
+        }
+
+        .option-btn:hover, .option-btn.selected {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
+            color: var(--secondary-gold);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(10, 8, 6, 0.8);
+            border: 1px solid var(--primary-gold);
+            color: var(--secondary-gold);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin: 10px 0;
+            outline: none;
+        }
+
+        .vault-input {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            letter-spacing: 8px;
+        }
+
+        .vault-btn {
+            background: linear-gradient(135deg, var(--primary-gold), #99751e);
+            color: #0b0907;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .danger-box {
+            border-color: var(--danger-red);
+        }
+        .danger-box::before {
+            background: var(--danger-red);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+        }
+
+        .riddle-box {
+            background: rgba(212, 175, 55, 0.05);
+            border-left: 3px solid var(--primary-gold);
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #f7edcc;
+        }
+
+        .vault-code-display {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px dashed var(--primary-gold);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 12px 0;
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            color: var(--secondary-gold);
+            letter-spacing: 2px;
+        }
+
+        #reader {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        /* CUSTOM MODAL OVERLAYS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 6, 5, 0.88);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-card {
+            background: #16120e;
+            border: 2px solid var(--primary-gold);
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.25);
+            text-align: center;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .modal-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-gold);
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .modal-card p {
+            font-size: 14px;
+            color: #d1c7b7;
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-actions button {
+            margin: 0;
+        }
+
+        .hidden { display: none !important; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container" id="main-header">
+        <h1>🔐 THE ULTIMATE VAULT</h1>
+        <div class="subtitle" id="user-badge">Unlock the Secret Code</div>
+    </div>
+
+    <!-- REGISTRATION SCREEN -->
+    <div id="screen-register" class="card">
+        <h3>👤 Enter Your Name</h3>
+        <p>Type your name to begin your quest and collect vault digits.</p>
+        <input type="text" id="player-name-input" class="text-input" placeholder="e.g. Karthik / Rahul">
+        <button onclick="registerPlayer()">Start Quest</button>
+    </div>
+
+    <!-- CHECKPOINT / SCANNER SCREEN -->
+    <div id="screen-checkpoint" class="card hidden">
+        <h3>📍 Find the Next Station</h3>
+        <p>Read the clue below to find where the next QR code is hidden.</p>
+        
+        <div class="riddle-box" id="riddle-text"></div>
+
+        <button class="vault-btn" onclick="startScanner()">📸 Scan QR Code</button>
+        <div id="reader" class="hidden"></div>
+        <button id="stop-scanner-btn" class="hidden" style="background: var(--danger-red); color: #fff;" onclick="stopScanner()">Close Camera</button>
+        <button class="vault-btn" style="margin-top: 15px;" onclick="forceCheckUpdate()">🔄 Check Quest Status</button>
+    </div>
+
+    <!-- QUESTION STAGES -->
+    <div id="screen-question" class="card hidden">
+        <h3 id="question-title">Stage Title</h3>
+        <p id="question-text">Question goes here...</p>
+        
+        <!-- COLLECTED VAULT DIGIT DISPLAY -->
+        <div id="vault-digit-preview" class="vault-code-display hidden">
+            🔒 Vault Digit Unlocked: <span id="current-earned-digit" style="color: #fff; font-size: 20px; font-weight: bold;">?</span>
+        </div>
+
+        <div id="options-container"></div>
+        <button id="submit-ans-btn" class="hidden" onclick="submitAnswerSelection()">Submit Answer</button>
+        
+        <div id="waiting-result-section" class="hidden">
+            <p style="margin-top: 15px; font-size: 13px; color: var(--primary-gold); text-align: center;">⏳ Answer submitted! Awaiting the Dungeon Master's verdict...</p>
+            <button class="vault-btn" onclick="forceCheckUpdate()">🔄 Check Verdict</button>
+        </div>
+    </div>
+
+    <!-- LOCKED OUT SCREEN -->
+    <div id="screen-locked" class="card danger-box hidden">
+        <h3 style="color: var(--danger-red);">🔒 Station Locked!</h3>
+        <p id="lock-message">You gave an incorrect answer.</p>
+        <p style="color: var(--primary-gold);"><strong>Penalty:</strong> Ask the Dungeon Master to unlock your path.</p>
+        <p id="lock-status-text" style="font-size: 12px; color: #bfa15f; margin-top: 10px;"></p>
+        <button style="background: var(--danger-red); color: #fff;" onclick="requestUnlock()">Summon Dungeon Master</button>
+    </div>
+
+    <!-- STAGE 6: THE FINAL VAULT LOCK CODE -->
+    <div id="screen-stage6" class="card hidden" style="border-color: var(--primary-gold);">
+        <h3 style="color: var(--primary-gold);">🏆 Final Vault Unlocking</h3>
+        <p>You have successfully collected all 5 vault digits along your journey! Enter your complete 5-digit vault passcode to unlock the final prize.</p>
+        
+        <div style="background: rgba(212, 175, 55, 0.08); border: 1px solid var(--primary-gold); border-radius: 8px; padding: 12px; margin: 15px 0; text-align: center;">
+            <p style="font-size: 12px; color: #d1c7b7; margin: 0 0 5px 0;">Your Collected Digits:</p>
+            <h2 id="final-collected-digits-preview" style="font-family: 'Cinzel', serif; color: var(--primary-gold); letter-spacing: 6px; margin: 0;">?????</h2>
+        </div>
+
+        <p style="font-size: 13px; color: var(--secondary-gold); margin-top: 10px;">Enter the 5-digit code:</p>
+        <input type="text" id="room-name-input" class="text-input vault-input" placeholder="*****" maxlength="5">
+        <button class="vault-btn" onclick="verifyMasterRoom()">Open Final Vault</button>
+        
+        <p id="room-success-msg" class="hidden" style="color: var(--primary-gold); font-size: 15px; font-weight: bold; margin-top: 15px; text-align: center; border: 1px dashed var(--primary-gold); padding: 10px;">
+            🎉 VAULT OPENED! <br><br>
+            <span style="color: #fff;">Your final surprise reward awaits right here!</span>
+        </p>
+    </div>
+
+    <!-- GLOBAL WINNER BROADCAST SCREEN -->
+    <div id="screen-winner-broadcast" class="card hidden" style="border-color: var(--primary-gold); text-align: center;">
+        <h3 style="color: var(--primary-gold); font-size: 22px;">🏆 QUEST CONCLUDED 🏆</h3>
+        <p style="font-size: 14px; color: #bfa15f; margin-bottom: 20px;">All stations have been conquered. The ultimate champion is crowned!</p>
+        
+        <div style="background: rgba(212, 175, 55, 0.08); border: 1px solid var(--primary-gold); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <p style="font-size: 12px; color: #d1c7b7; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 5px 0;">🥇 Grand Champion 🥇</p>
+            <h2 id="broadcast-winner-name" style="font-family: 'Cinzel', serif; font-size: 28px; color: var(--primary-gold); margin: 0 0 10px 0;">---</h2>
+            <p id="broadcast-winner-stats" style="font-size: 14px; color: #fff; margin: 0;"></p>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.5); border-radius: 8px; padding: 12px; text-align: left; margin-bottom: 15px;">
+            <h4 style="color: var(--primary-gold); font-size: 13px; margin: 0 0 8px 0; font-family: 'Cinzel', serif;">Leaderboard Podiums:</h4>
+            <div id="broadcast-podium-list" style="font-size: 13px; color: #d1c7b7;"></div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL OVERLAY -->
+    <div id="screen-admin" class="card hidden" style="border-color: var(--accent-red);">
+        <h3 style="color: var(--accent-red);">📜 Dungeon Master Control Panel</h3>
+        <p style="font-size: 12px; color: #bfa15f;">Manage player progress and release verdict results live.</p>
+        
+        <!-- AUDIO IMMERSION CONTROLS FOR ADMIN -->
+        <div style="margin-top: 15px; background: rgba(139, 0, 0, 0.15); border: 1px solid var(--accent-red); padding: 12px; border-radius: 8px;">
+            <h4 style="color: var(--primary-gold); font-size: 14px; margin-bottom: 5px;">🎵 Atmospheric Sound & Cinematic DM Voice</h4>
+            <p style="font-size: 12px; color: #d1c7b7; margin-bottom: 10px;">Toggle rain/ambience sound and voice announcements:</p>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <button class="vault-btn" style="flex: 1; margin: 0; font-size: 11px;" onclick="toggleBackgroundAudio()">⚡ Toggle Ambience</button>
+                <button id="admin-voice-toggle-btn" style="flex: 1; margin: 0; font-size: 11px; background: #374151; color: #fff;" onclick="toggleAdminVoice()">🔊 DM Voice: ON</button>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; border-radius: 8px;">
+            <h4 style="color: var(--primary-gold); font-size: 14px; margin-bottom: 5px;">🏆 Champion Proclamation</h4>
+            <button class="vault-btn" style="margin: 0;" onclick="triggerDeclareWinner()">📢 Declare Champion to All Screens</button>
+            <button style="background: #374151; color: #fff; margin-top: 8px;" onclick="cancelDeclareWinner()">🔄 Hide Champion Banner</button>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <h4 style="color: #fff; font-size: 14px; margin-bottom: 5px;">⚡ Set Correct Answers & Release Verdicts</h4>
+            <div id="admin-controls-container" style="font-size: 13px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px;"></div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h4 style="color: #fff; font-size: 14px; margin-bottom: 5px;">Player Status Ledger</h4>
+            <div id="admin-table-container"></div>
+        </div>
+        
+        <button style="background: var(--accent-red); color: #fff; margin-top: 20px;" onclick="resetEntireDatabase()">⚠️ Reset Entire Game</button>
+        <button style="background: #374151; color: #fff; margin-top: 10px;" onclick="closeAdminPanel()">Close Control Panel</button>
+    </div>
+
+    <!-- CUSTOM STYLED DIALOG MODAL -->
+    <div id="custom-modal" class="modal-overlay hidden">
+        <div class="modal-card" id="modal-card-box">
+            <h3 id="modal-title" style="color: var(--primary-gold);">Notice</h3>
+            <p id="modal-message">Message goes here...</p>
+            <div id="modal-input-container" class="hidden">
+                <input type="text" id="modal-input" class="text-input" placeholder="">
+            </div>
+            <div class="modal-actions" id="modal-actions-container">
+                <button id="modal-ok-btn" onclick="closeModal(true)">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (ES Module Integration) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-analytics.js";
+        import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCrkLzino6MfpKtcdf9hCIihznaEPoQ250",
+            authDomain: "karthikvegasgame.firebaseapp.com",
+            databaseURL: "https://karthikvegasgame-default-rtdb.firebaseio.com",
+            projectId: "karthikvegasgame",
+            storageBucket: "karthikvegasgame.firebasestorage.app",
+            messagingSenderId: "977251555501",
+            appId: "1:977251555501:web:44cc7509a23256f2ea8e24",
+            measurementId: "G-TKLVZYT0ML"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const rdb = getDatabase(app);
+
+        // Simple questions and vault digits assigned per stage
+        const stagesData = {
+            1: {
+                title: "Stage 1: The Kitchen",
+                text: "What does Karthik usually do when deciding what to eat?",
+                options: [
+                    { id: 'A', text: "A. Takes forever to decide and orders takeout" },
+                    { id: 'B', text: "B. Cooks a 5-course gourmet meal instantly" },
+                    { id: 'C', text: "C. Eats whatever is closest immediately" },
+                    { id: 'D', text: "D. Skips eating altogether" }
+                ],
+                riddle: "Look near the kitchen counter or refrigerator for the next QR code!",
+                vaultDigit: "7"
+            },
+            2: {
+                title: "Stage 2: The Living Room",
+                text: "Where is Karthik's absolute favorite place to relax?",
+                options: [
+                    { id: 'A', text: "A. Sitting at a strict desk" },
+                    { id: 'B', text: "B. Stretched out comfortably on the sofa" },
+                    { id: 'C', text: "C. Standing up while working" },
+                    { id: 'D', text: "D. Exercising outside" }
+                ],
+                riddle: "Check around the sofa cushions or TV console for the next QR code!",
+                vaultIndex: 1,
+                vaultDigit: "4"
+            },
+            3: {
+                title: "Stage 3: The Phone Screen",
+                text: "What is Karthik's typical habit with his phone or notifications?",
+                options: [
+                    { id: 'A', text: "A. Clears every single notification instantly" },
+                    { id: 'B', text: "B. Leaves hundreds of unread messages piled up" },
+                    { id: 'C', text: "C. Never touches his phone" },
+                    { id: 'D', text: "D. Turns off his phone all day" }
+                ],
+                riddle: "Check near the charging station or coffee table for the next QR code!",
+                vaultIndex: 2,
+                vaultDigit: "2"
+            },
+            4: {
+                title: "Stage 4: Game Time",
+                text: "How does Karthik usually play party games or video games?",
+                options: [
+                    { id: 'A', text: "A. Just for fun without caring about winning" },
+                    { id: 'B', text: "B. Competes with total focus and strategic planning" },
+                    { id: 'C', text: "C. Falls asleep during the game" },
+                    { id: 'D', text: "D. Quits right at the start" }
+                ],
+                riddle: "Search near the game board or bookshelf for the next QR code!",
+                vaultIndex: 3,
+                vaultDigit: "9"
+            },
+            5: {
+                title: "Stage 5: Vacation Mode",
+                text: "What is Karthik's ideal way to spend a day by the pool?",
+                options: [
+                    { id: 'A', text: "A. Swimming non-stop laps for hours" },
+                    { id: 'B', text: "B. Relaxing in the shade with sunglasses and a cool drink" },
+                    { id: 'C', text: "C. Staying indoors away from the water" },
+                    { id: 'D', text: "D. Organizing everyone's schedule" }
+                ],
+                riddle: "Check near the doorway or outdoor exit for the final QR code!",
+                vaultIndex: 4,
+                vaultDigit: "5"
+            }
+        };
+
+        let html5QrCode = null;
+        let headerClickCount = 0;
+        let headerClickTimer = null;
+        let currentPlayer = localStorage.getItem('karthik_current_player') || null;
+        let isAdminAuthenticated = sessionStorage.getItem('karthikAdminAuth') === 'true'; 
+        let globalDBCache = { players: {}, releasedResults: {1:false,2:false,3:false,4:false,5:false}, adminAnswers: {1:'',2:'',3:'',4:'',5:''}, winnerBroadcast: null };
+        let modalResolveCallback = null;
+
+        // --- AUDIO AMBIENCE ---
+        let audioCtx = null;
+        let isAmbiencePlaying = false;
+        let ambienceGain = null;
+        let noiseNode = null;
+        let droneOsc1 = null;
+        let droneOsc2 = null;
+        let thunderInterval = null;
+
+        window.toggleBackgroundAudio = function() {
+            if (!isAdminAuthenticated) return;
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+
+            if (isAmbiencePlaying) {
+                stopProceduralAmbience();
+                isAmbiencePlaying = false;
+                speakDungeonMasterAdmin("Ambience paused.");
+            } else {
+                startProceduralAmbience();
+                isAmbiencePlaying = true;
+                speakDungeonMasterAdmin("Ambience active.");
+            }
+        }
+
+        function startProceduralAmbience() {
+            if (!audioCtx) return;
+            ambienceGain = audioCtx.createGain();
+            ambienceGain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+            ambienceGain.connect(audioCtx.destination);
+
+            const bufferSize = audioCtx.sampleRate * 3;
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
+
+            noiseNode = audioCtx.createBufferSource();
+            noiseNode.buffer = noiseBuffer;
+            noiseNode.loop = true;
+
+            const rainFilter = audioCtx.createBiquadFilter();
+            rainFilter.type = 'bandpass';
+            rainFilter.frequency.setValueAtTime(650, audioCtx.currentTime);
+
+            const rainGain = audioCtx.createGain();
+            rainGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+            noiseNode.connect(rainFilter);
+            rainFilter.connect(rainGain);
+            rainGain.connect(ambienceGain);
+            noiseNode.start();
+
+            droneOsc1 = audioCtx.createOscillator();
+            droneOsc1.type = 'sawtooth';
+            droneOsc1.frequency.setValueAtTime(46.25, audioCtx.currentTime);
+
+            droneOsc2 = audioCtx.createOscillator();
+            droneOsc2.type = 'triangle';
+            droneOsc2.frequency.setValueAtTime(49.00, audioCtx.currentTime);
+
+            const droneFilter = audioCtx.createBiquadFilter();
+            droneFilter.type = 'lowpass';
+            droneFilter.frequency.setValueAtTime(95, audioCtx.currentTime);
+
+            const droneGain = audioCtx.createGain();
+            droneGain.gain.setValueAtTime(0.28, audioCtx.currentTime);
+
+            droneOsc1.connect(droneFilter);
+            droneOsc2.connect(droneFilter);
+            droneFilter.connect(droneGain);
+            droneGain.connect(ambienceGain);
+
+            droneOsc1.start();
+            droneOsc2.start();
+        }
+
+        function stopProceduralAmbience() {
+            if (noiseNode) { try { noiseNode.stop(); } catch(e){} }
+            if (droneOsc1) { try { droneOsc1.stop(); } catch(e){} }
+            if (droneOsc2) { try { droneOsc2.stop(); } catch(e){} }
+        }
+
+        let adminVoiceMuted = false;
+        window.toggleAdminVoice = function() {
+            adminVoiceMuted = !adminVoiceMuted;
+            const btn = document.getElementById('admin-voice-toggle-btn');
+            if (adminVoiceMuted) {
+                btn.innerText = "🔇 DM Voice: OFF";
+                btn.style.background = "rgba(212,175,55,0.2)";
+                btn.style.color = "var(--primary-gold)";
+            } else {
+                btn.innerText = "🔊 DM Voice: ON";
+                btn.style.background = "#374151";
+                btn.style.color = "#fff";
+                speakDungeonMasterAdmin("Voice channels active.");
+            }
+        }
+
+        window.speakDungeonMasterAdmin = function(text) {
+            if (!isAdminAuthenticated || adminVoiceMuted || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const cleanText = text.replace(/<[^>]*>?/gm, '');
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.rate = 0.9;
+            utterance.pitch = 0.5;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        window.showCustomModal = function(title, message, isPrompt = false, defaultValue = "", isDanger = false) {
+            return new Promise((resolve) => {
+                modalResolveCallback = resolve;
+                document.getElementById('modal-title').innerText = title;
+                document.getElementById('modal-title').style.color = isDanger ? 'var(--danger-red)' : 'var(--primary-gold)';
+                document.getElementById('modal-message').innerHTML = message;
+                
+                const inputContainer = document.getElementById('modal-input-container');
+                const inputField = document.getElementById('modal-input');
+                const actionsContainer = document.getElementById('modal-actions-container');
+
+                if (isPrompt) {
+                    inputContainer.classList.remove('hidden');
+                    inputField.value = defaultValue;
+                    inputField.type = title.toLowerCase().includes('passcode') || title.toLowerCase().includes('verification') ? 'password' : 'text';
+                    setTimeout(() => inputField.focus(), 100);
+                    actionsContainer.innerHTML = `
+                        <button style="background: #374151; color: #fff;" onclick="closeModal(false)">Cancel</button>
+                        <button class="${isDanger ? '' : 'vault-btn'}" style="${isDanger ? 'background:var(--danger-red); color:#fff;' : ''}" onclick="closeModal(true, document.getElementById('modal-input').value)">Confirm</button>
+                    `;
+                } else {
+                    inputContainer.classList.add('hidden');
+                    actionsContainer.innerHTML = `
+                        <button class="${isDanger ? '' : 'vault-btn'}" style="${isDanger ? 'background:var(--danger-red); color:#fff;' : ''}" onclick="closeModal(true)">Acknowledge</button>
+                    `;
+                }
+                document.getElementById('custom-modal').classList.remove('hidden');
+            });
+        }
+
+        window.closeModal = function(confirmed, value = null) {
+            document.getElementById('custom-modal').classList.add('hidden');
+            if (modalResolveCallback) {
+                modalResolveCallback(confirmed ? (value !== null ? value : true) : null);
+                modalResolveCallback = null;
+            }
+        }
+
+        onValue(ref(rdb, 'game'), (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                globalDBCache = data;
+                if(!globalDBCache.players) globalDBCache.players = {};
+                if(!globalDBCache.releasedResults) globalDBCache.releasedResults = {1:false,2:false,3:false,4:false,5:false};
+                if(!globalDBCache.adminAnswers) globalDBCache.adminAnswers = {1:'',2:'',3:'',4:'',5:''};
+            }
+            renderState();
+            if (!document.getElementById('screen-admin').classList.contains('hidden')) {
+                renderAdminPanelContent();
+            }
+        });
+
+        document.getElementById('main-header').addEventListener('click', () => {
+            headerClickCount++;
+            if (headerClickCount === 1) {
+                headerClickTimer = setTimeout(() => { headerClickCount = 0; }, 800);
+            } else {
+                if (headerClickCount === 3) {
+                    clearTimeout(headerClickTimer);
+                    headerClickCount = 0;
+                    promptForAdmin();
+                }
+            }
+        });
+
+        async function promptForAdmin() {
+            if (isAdminAuthenticated) {
+                openAdminPanel();
+                return;
+            }
+            const passcode = await showCustomModal("🔒 Admin Verification", "Enter Admin Passcode:", true, "", false);
+            if (passcode === "vegas2026") {
+                isAdminAuthenticated = true;
+                sessionStorage.setItem('karthikAdminAuth', 'true');
+                openAdminPanel();
+            } else {
+                if (passcode !== null) {
+                    await showCustomModal("Access Denied", "❌ Incorrect passcode.", false, "", true);
+                }
+            }
+        }
+
+        function openAdminPanel() {
+            window.stopScanner();
+            hideAll();
+            const newUrl = window.location.pathname + "?admin=true";
+            window.history.replaceState({}, document.title, newUrl);
+            document.getElementById('screen-admin').classList.remove('hidden');
+            renderAdminPanelContent();
+        }
+
+        window.closeAdminPanel = function() {
+            isAdminAuthenticated = false;
+            sessionStorage.removeItem('karthikAdminAuth');
+            window.history.replaceState({}, document.title, window.location.pathname);
+            document.getElementById('screen-admin').classList.add('hidden');
+            renderState();
+        }
+
+        function updateCloudDB(path, value) {
+            set(ref(rdb, 'game/' + path), value);
+        }
+
+        window.registerPlayer = async function() {
+            const nameInput = document.getElementById('player-name-input').value.trim();
+            if (!nameInput) {
+                await showCustomModal("Invalid Name", "Please enter your name!", false, "", true);
+                return;
+            }
+
+            currentPlayer = nameInput;
+            localStorage.setItem('karthik_current_player', currentPlayer);
+
+            const pRef = ref(rdb, 'game/players/' + currentPlayer);
+            onValue(pRef, (snapshot) => {
+                if (!snapshot.exists()) {
+                    set(pRef, {
+                        score: 100,
+                        currentStage: 1,
+                        status: 'active',
+                        selectedAnswer: null,
+                        wrongAttempts: 0,
+                        vaultCode: "?????"
+                    });
+                }
+            }, { onlyOnce: true });
+            renderState();
+        }
+
+        window.forceCheckUpdate = function() {
+            renderState();
+        }
+
+        async function renderState() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.get('admin') === 'true') {
+                if (isAdminAuthenticated) {
+                    hideAll();
+                    document.getElementById('screen-admin').classList.remove('hidden');
+                    renderAdminPanelContent();
+                    return;
+                }
+                hideAll();
+                const passcode = await showCustomModal("🔒 Admin Verification", "Enter Admin Passcode:", true, "", false);
+                if (passcode === "vegas2026") {
+                    isAdminAuthenticated = true;
+                    sessionStorage.setItem('karthikAdminAuth', 'true');
+                    document.getElementById('screen-admin').classList.add('hidden');
+                    renderAdminPanelContent();
+                    return;
+                } else {
+                    if (passcode !== null) {
+                        await showCustomModal("Access Denied", "❌ Incorrect passcode.", false, "", true);
+                    }
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    renderState(); 
+                    return;
+                }
+            }
+
+            if (!document.getElementById('screen-admin').classList.contains('hidden')) {
+                return;
+            }
+
+            window.stopScanner();
+            hideAll();
+
+            if (globalDBCache.winnerBroadcast) {
+                document.getElementById('screen-winner-broadcast').classList.remove('hidden');
+                renderWinnerBroadcastDetails(globalDBCache.winnerBroadcast);
+                return;
+            }
+
+            if (!currentPlayer) {
+                document.getElementById('screen-register').classList.remove('hidden');
+                return;
+            }
+
+            let pData = globalDBCache.players[currentPlayer];
+            if (!pData) {
+                let newP = { score: 100, currentStage: 1, status: 'active', selectedAnswer: null, wrongAttempts: 0, vaultCode: "?????" };
+                updateCloudDB('players/' + currentPlayer, newP);
+                pData = newP;
+            }
+
+            document.getElementById('user-badge').innerText = `Player: ${currentPlayer} | Score: ${pData.score} pts`;
+
+            const scannedStation = parseInt(urlParams.get('station') || '0');
+
+            if (scannedStation > 0) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+
+                if (scannedStation > pData.currentStage && pData.currentStage <= 5) {
+                    await showCustomModal("Wrong Station", `🚨 You must finish Stage ${pData.currentStage} before scanning station ${scannedStation}!`, false, "", true);
+                    renderState();
+                    return;
+                }
+
+                if (scannedStation === pData.currentStage && pData.status === 'active') {
+                    updateCloudDB(`players/${currentPlayer}/status`, 'answering');
+                    return;
+                }
+            }
+
+            if (pData.status === 'locked' || pData.status === 'wrong_twice') {
+                document.getElementById('screen-locked').classList.remove('hidden');
+                let penaltyText = pData.status === 'wrong_twice' ? "You missed twice. Ask the Dungeon Master to unlock your progress." : "Incorrect answer (-5 points). Ask the Dungeon Master to unlock you.";
+                document.getElementById('lock-message').innerText = penaltyText;
+                document.getElementById('lock-status-text').innerText = `Current Stage: ${pData.currentStage} | Status: Locked`;
+                return;
+            }
+
+            if (pData.currentStage > 5 || pData.status === 'stage6') {
+                document.getElementById('screen-stage6').classList.remove('hidden');
+                let codeStr = pData.vaultCode || "74295";
+                document.getElementById('final-collected-digits-preview').innerText = codeStr;
+                return;
+            }
+
+            if (pData.status === 'answering' || pData.status === 'waiting_result') {
+                const stageNum = pData.currentStage;
+                const stageInfo = stagesData[stageNum];
+                document.getElementById('screen-question').classList.remove('hidden');
+                document.getElementById('question-title').innerText = stageInfo.title;
+                document.getElementById('question-text').innerText = stageInfo.text;
+
+                if (globalDBCache.releasedResults[stageNum]) {
+                    checkLiveEvaluation(pData, stageNum);
+                    return;
+                }
+
+                if (pData.status === 'waiting_result') {
+                    document.getElementById('options-container').innerHTML = `<p style="color:var(--primary-gold); text-align:center;">Selected Answer: <strong>${pData.selectedAnswer || 'None'}</strong></p>`;
+                    document.getElementById('submit-ans-btn').classList.add('hidden');
+                    document.getElementById('waiting-result-section').classList.remove('hidden');
+                    document.getElementById('vault-digit-preview').classList.add('hidden');
+                } else {
+                    document.getElementById('waiting-result-section').classList.add('hidden');
+                    document.getElementById('vault-digit-preview').classList.remove('hidden');
+                    document.getElementById('current-earned-digit').innerText = stageInfo.vaultDigit;
+
+                    let optHtml = '';
+                    stageInfo.options.forEach(opt => {
+                        let isSel = pData.selectedAnswer === opt.id ? 'selected' : '';
+                        optHtml += `<button class="option-btn ${isSel}" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+                    });
+                    document.getElementById('options-container').innerHTML = optHtml;
+                    if (pData.selectedAnswer) {
+                        document.getElementById('submit-ans-btn').classList.remove('hidden');
+                    } else {
+                        document.getElementById('submit-ans-btn').classList.add('hidden');
+                    }
+                }
+                return;
+            }
+
+            document.getElementById('screen-checkpoint').classList.remove('hidden');
+            const currentStageNum = pData.currentStage || 1;
+            const activeRiddle = stagesData[currentStageNum].riddle;
+            document.getElementById('riddle-text').innerHTML = `📍 <strong>Stage ${currentStageNum} Clue:</strong> ${activeRiddle}`;
+        }
+
+        window.selectOption = function(optId) {
+            let pData = globalDBCache.players[currentPlayer];
+            if (pData && pData.status === 'waiting_result') return;
+
+            updateCloudDB(`players/${currentPlayer}/selectedAnswer`, optId);
+            if(pData) pData.selectedAnswer = optId;
+            let stageNum = pData ? pData.currentStage : 1;
+            let stageInfo = stagesData[stageNum];
+            let optHtml = '';
+            stageInfo.options.forEach(opt => {
+                let isSel = optId === opt.id ? 'selected' : '';
+                optHtml += `<button class="option-btn ${isSel}" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+            });
+            document.getElementById('options-container').innerHTML = optHtml;
+            document.getElementById('submit-ans-btn').classList.remove('hidden');
+        }
+
+        window.submitAnswerSelection = async function() {
+            let pData = globalDBCache.players[currentPlayer];
+            if (!pData || !pData.selectedAnswer) {
+                await showCustomModal("Notice", "Please select an answer first!", false, "", true);
+                return;
+            }
+            if (pData.status === 'waiting_result') return;
+            updateCloudDB(`players/${currentPlayer}/status`, 'waiting_result');
+        }
+
+        async function checkLiveEvaluation(pData, stageNum) {
+            const correctOpt = globalDBCache.adminAnswers[stageNum];
+            if (!correctOpt) {
+                await showCustomModal("Warning", "⚠️ The Dungeon Master has released the verdict, but hasn't entered the correct answer yet!", false, "", true);
+                return;
+            }
+
+            let updates = {};
+            if (pData.selectedAnswer === correctOpt) {
+                let nextStage = pData.currentStage + 1;
+                
+                // Update vault code string
+                let currentCode = pData.vaultCode || "?????";
+                let codeArr = currentCode.split('');
+                let digitToAdd = stagesData[stageNum].vaultDigit;
+                let digitIdx = stageNum - 1;
+                codeArr[digitIdx] = digitToAdd;
+                let newCodeStr = codeArr.join('');
+
+                updates[`players/${currentPlayer}/currentStage`] = nextStage;
+                updates[`players/${currentPlayer}/selectedAnswer`] = null;
+                updates[`players/${currentPlayer}/status`] = nextStage > 5 ? 'stage6' : 'active';
+                updates[`players/${currentPlayer}/wrongAttempts`] = 0;
+                updates[`players/${currentPlayer}/vaultCode`] = newCodeStr;
+                update(ref(rdb, 'game'), updates);
+
+                speakDungeonMasterAdmin(`Correct! Vault digit ${digitToAdd} unlocked!`);
+
+                if (nextStage > 5) {
+                    await showCustomModal("Stage Cleared!", `✨ Correct! You collected all 5 vault digits: <strong>${newCodeStr}</strong>! Proceed to the final vault.`);
+                } else {
+                    let nextClue = stagesData[nextStage].riddle;
+                    await showCustomModal("Stage Cleared!", `✨ Correct! Vault digit unlocked: <strong>${digitToAdd}</strong>.<br><br><strong>Next Station Clue:</strong><br>${nextClue}`);
+                }
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else {
+                let newAttempts = (pData.wrongAttempts || 0) + 1;
+                updates[`players/${currentPlayer}/wrongAttempts`] = newAttempts;
+                updates[`players/${currentPlayer}/selectedAnswer`] = null;
+                
+                if (newAttempts >= 2) {
+                    updates[`players/${currentPlayer}/status`] = 'wrong_twice';
+                    updates[`players/${currentPlayer}/score`] = Math.max(0, pData.score - 5);
+                } else {
+                    updates[`players/${currentPlayer}/status`] = 'locked';
+                    updates[`players/${currentPlayer}/score`] = Math.max(0, pData.score - 5);
+                }
+                update(ref(rdb, 'game'), updates);
+                
+                speakDungeonMasterAdmin(`Incorrect answer. Station locked.`);
+                await showCustomModal("Incorrect", "❌ That answer was incorrect (-5 points). Ask the Dungeon Master to unlock you.", false, "", true);
+            }
+        }
+
+        function renderWinnerBroadcastDetails(winnerData) {
+            if (!winnerData) return;
+            document.getElementById('broadcast-winner-name').innerText = winnerData.name;
+            document.getElementById('broadcast-winner-stats').innerText = `Final Score: ${winnerData.score} pts | Vault Fully Unlocked`;
+
+            let podiumHtml = '';
+            if (winnerData.podium && winnerData.podium.length > 0) {
+                winnerData.podium.forEach((item, index) => {
+                    let medal = index === 0 ? '🥇' : (index === 1 ? '🥈' : (index === 2 ? '🥉' : '🔹'));
+                    podiumHtml += `<div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(212,175,55,0.1);">
+                        <span>${medal} <strong>${item.name}</strong></span>
+                        <span style="color:var(--primary-gold);">${item.score} pts</span>
+                    </div>`;
+                });
+            } else {
+                podiumHtml = '<span>No other rankings recorded.</span>';
+            }
+            document.getElementById('broadcast-podium-list').innerHTML = podiumHtml;
+        }
+
+        window.triggerDeclareWinner = async function() {
+            let players = globalDBCache.players;
+            if (!players || Object.keys(players).length === 0) {
+                await showCustomModal("Error", "No players registered yet!", false, "", true);
+                return;
+            }
+
+            let playerList = [];
+            for (let name in players) {
+                playerList.push({ name: name, score: players[name].score || 0, stage: players[name].currentStage || 1 });
+            }
+            playerList.sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                return b.stage - a.stage;
+            });
+
+            let topWinner = playerList[0];
+            let topPodium = playerList.slice(0, 5);
+
+            let winnerPayload = {
+                name: topWinner.name,
+                score: topWinner.score,
+                podium: topPodium
+            };
+
+            updateCloudDB('winnerBroadcast', winnerPayload);
+            speakDungeonMasterAdmin(`Champion declared! Winner is ${topWinner.name}!`);
+            await showCustomModal("Proclamation Sent!", `📢 Champion proclaimed! <strong>${topWinner.name}</strong> is shown on all screens.`);
+        }
+
+        window.cancelDeclareWinner = function() {
+            updateCloudDB('winnerBroadcast', null);
+        }
+
+        window.verifyMasterRoom = async function() {
+            let roomInput = document.getElementById('room-name-input').value.trim();
+            let pData = globalDBCache.players[currentPlayer];
+            let correctVaultCode = pData ? pData.vaultCode : "74295";
+            
+            if (roomInput === correctVaultCode || roomInput === "74295") {
+                document.getElementById('room-success-msg').classList.remove('hidden');
+                speakDungeonMasterAdmin("Vault unlocked successfully!");
+                await showCustomModal("Vault Opened!", "🎉 Success! The vault is unlocked and your reward is revealed!");
+            } else {
+                speakDungeonMasterAdmin("Incorrect vault code. Try again!");
+                await showCustomModal("Incorrect Code", "❌ Incorrect vault passcode! Check your collected digits and try again.", false, "", true);
+            }
+        }
+
+        window.startScanner = function() {
+            document.getElementById('reader').classList.remove('hidden');
+            document.getElementById('stop-scanner-btn').classList.remove('hidden');
+
+            html5QrCode = new Html5Qrcode("reader");
+            html5QrCode.start(
+                { facingMode: "environment" },
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                (decodedText, decodedResult) => {
+                    window.stopScanner();
+                    try {
+                        const url = new URL(decodedText);
+                        const station = url.searchParams.get('station');
+                        if (station !== null) {
+                            window.location.href = decodedText;
+                        } else {
+                            showCustomModal("Invalid QR", "❌ Invalid QR code scanned!", false, "", true);
+                        }
+                    } catch (e) {
+                        showCustomModal("Invalid QR", "❌ Scanned code is not a valid quest URL.", false, "", true);
+                    }
+                },
+                (errorMessage) => {}
+            ).catch(async (err) => {
+                await showCustomModal("Camera Error", "Camera access denied or unavailable.", false, "", true);
+            });
+        }
+
+        window.stopScanner = function() {
+            if (html5QrCode) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode.clear();
+                }).catch(err => {
+                    console.log("Scanner stop error", err);
+                });
+            }
+            document.getElementById('reader').classList.add('hidden');
+            document.getElementById('stop-scanner-btn').classList.add('hidden');
+        }
+
+        window.requestUnlock = async function() {
+            speakDungeonMasterAdmin("A player has requested an unlock.");
+            await showCustomModal("Unlock Requested", "📢 Dungeon Master notified! Ask the host to unlock your station.");
+        }
+
+        function renderAdminPanelContent() {
+            let controlsHtml = '';
+            for (let s = 1; s <= 5; s++) {
+                let released = globalDBCache.releasedResults[s];
+                let currentAns = globalDBCache.adminAnswers[s] || '';
+                controlsHtml += `<div style="margin-bottom: 14px; border-bottom: 1px solid rgba(212,175,55,0.1); padding-bottom: 10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+                        <strong>${stagesData[s].title}</strong>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <span style="font-size:11px; color:var(--primary-gold);">Correct Answer:</span>
+                            <input type="text" style="width:45px; padding:4px; text-align:center; margin:0; font-size:12px; background:rgba(0,0,0,0.6); border:1px solid var(--primary-gold); color:#fff; border-radius:4px;" maxlength="1" value="${currentAns}" onchange="updateAdminAnswer(${s}, this.value)">
+                        </div>
+                    </div>
+                    <div>
+                        <button style="padding:8px 12px; font-size:12px; margin:0; background:${released ? '#374151' : 'var(--primary-gold)'}; color:${released ? '#fff' : '#000'};" onclick="releaseLiveResult(${s})">${released ? 'Verdict Released (Active)' : '📢 Release Verdict Live'}</button>
+                    </div>
+                </div>`;
+            }
+            document.getElementById('admin-controls-container').innerHTML = controlsHtml;
+
+            let tableHtml = `<table>
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Stage</th>
+                        <th>Answer</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            let players = globalDBCache.players;
+            if (!players || Object.keys(players).length === 0) {
+                tableHtml += `<tr><td colspan="6">No players registered yet.</td></tr>`;
+            } else {
+                for (let name in players) {
+                    let p = players[name];
+                    let actionBtn = '—';
+                    if (p.status === 'locked' || p.status === 'wrong_twice') {
+                        actionBtn = `<button style="padding:4px 8px; font-size:10px; margin:0;" onclick="adminUnlockPlayer('${name}')">Unlock</button> <button style="padding:4px 8px; font-size:10px; margin:0; background:var(--primary-gold); color:#000;" onclick="adminOverrideAdvance('${name}')">Advance</button>`;
+                    }
+                    tableHtml += `<tr>
+                        <td><strong>${name}</strong></td>
+                        <td style="color: var(--primary-gold);">${p.score}</td>
+                        <td>${p.currentStage}</td>
+                        <td style="color: #38bdf8;">${p.selectedAnswer ? 'Ans ' + p.selectedAnswer : '—'}</td>
+                        <td style="color: ${p.status.includes('locked') || p.status === 'wrong_twice' ? 'var(--danger-red)' : 'var(--primary-gold)'};">${p.status}</td>
+                        <td>${actionBtn}</td>
+                    </tr>`;
+                }
+            }
+            tableHtml += `</tbody></table>`;
+            document.getElementById('admin-table-container').innerHTML = tableHtml;
+        }
+
+        window.updateAdminAnswer = function(stageNum, val) {
+            updateCloudDB(`adminAnswers/${stageNum}`, val.toUpperCase().trim());
+        }
+
+        window.releaseLiveResult = async function(stageNum) {
+            if (!globalDBCache.adminAnswers[stageNum]) {
+                await showCustomModal("Missing Answer", "⚠️ Please enter the correct answer (A, B, C, or D) for this stage first!", false, "", true);
+                return;
+            }
+            updateCloudDB(`releasedResults/${stageNum}`, true);
+            speakDungeonMasterAdmin(`Verdict released for stage ${stageNum}!`);
+            renderAdminPanelContent();
+        }
+
+        window.adminUnlockPlayer = function(playerName) {
+            const p = globalDBCache.players[playerName];
+            const updates = {};
+            updates[`players/${playerName}/status`] = 'answering';
+            updates[`players/${playerName}/selectedAnswer`] = null;
+            updates[`players/${playerName}/wrongAttempts`] = 0;
+            
+            if (p && p.currentStage <= 5) {
+                updates[`releasedResults/${p.currentStage}`] = false;
+            }
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+            speakDungeonMasterAdmin(`Player ${playerName} unlocked.`);
+            update(ref(rdb, 'game'), updates).then(() => {
+                renderAdminPanelContent();
+            });
+        }
+
+        window.adminOverrideAdvance = function(playerName) {
+            const p = globalDBCache.players[playerName];
+            if (p) {
+                const nextStage = p.currentStage + 1;
+                const dbUpdates = {};
+                
+                dbUpdates[`players/${playerName}/score`] = Math.max(0, p.score - 10); 
+                dbUpdates[`players/${playerName}/currentStage`] = nextStage;
+                dbUpdates[`players/${playerName}/status`] = nextStage > 5 ? 'stage6' : 'active';
+                dbUpdates[`players/${playerName}/selectedAnswer`] = null;
+                dbUpdates[`players/${playerName}/wrongAttempts`] = 0;
+                
+                window.history.replaceState({}, document.title, window.location.pathname);
+                speakDungeonMasterAdmin(`Player ${playerName} advanced.`);
+                update(ref(rdb, 'game'), dbUpdates).then(() => {
+                    renderAdminPanelContent();
+                });
+            }
+        }
+
+        window.resetEntireDatabase = async function() {
+            const confirmed = await showCustomModal("⚠️ Reset Game", "Are you sure you want to reset all players and start over?", true, "", true);
+            if (confirmed !== null) {
+                set(ref(rdb, 'game'), {
+                    players: {},
+                    releasedResults: {1:false, 2:false, 3:false, 4:false, 5:false},
+                    adminAnswers: {1:'', 2:'', 3:'', 4:'', 5:''},
+                    winnerBroadcast: null
+                });
+                speakDungeonMasterAdmin("Game reset successfully.");
+                await showCustomModal("Reset Complete", "🧹 Game reset back to start.");
+            }
+        }
+
+        function hideAll() {
+            document.getElementById('screen-register').classList.add('hidden');
+            document.getElementById('screen-checkpoint').classList.add('hidden');
+            document.getElementById('screen-locked').classList.add('hidden');
+            document.getElementById('screen-question').classList.add('hidden');
+            document.getElementById('screen-stage6').classList.add('hidden');
+            document.getElementById('screen-winner-broadcast').classList.add('hidden');
+            document.getElementById('screen-admin').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
